@@ -151,15 +151,13 @@
 <p>17.2 &lt;&#x3D; GitLab CE&#x2F;EE &lt; 17.2.5</p>
 <p>17.3 &lt;&#x3D; GitLab CE&#x2F;EE &lt; 17.3.2</p>
 <p>2.环境搭建</p>
-<p>        2.1Linux下漏洞环境准备<br>检查版本信息，GitLab版本为16.2.1-ce，属于漏洞覆盖范围内<br>cat &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails&#x2F;VERSION<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/1.png" alt="CVE-2024-6678漏洞修复方案"><br>3.漏洞验证</p>
+<p>        2.1Linux下漏洞环境准备<br>检查版本信息，GitLab版本为16.2.1-ce，属于漏洞覆盖范围内<br>cat &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails&#x2F;VERSION<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/1.png"><br>3.漏洞验证</p>
 <p>        3.1版本检测</p>
-<p>影响版本：8.14 ≤ GitLab &lt; 17.1.7、17.2 ≤ GitLab &lt; 17.2.5、17.3 ≤ GitLab &lt; 17.3.2<br>若当前版本在受影响范围内且未升级到修复版本，则存在风险</p>
-<p>4.漏洞修复</p>
-<p>        4.1版本升级</p>
-<p>sudo apt-cache madison gitlab-ce查看所有版本注意不要直接跨大版本升级,否则报错,需要按官方升级文档按顺序依次升级apt install gitlab-ce&#x3D;xx.x.x-ce.0​​​​​​​​​​​​​​​​​​​​​​​​​​​​升级后通过命令查看版本是否提高<br>cat &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails&#x2F;VERSION​​​​​​​​​​​​​​继续重复升级,升级到不被漏洞影响的版本<br>sudo apt install gitlab-ce&#x3D;17.0.5-ce.0<br>sudo apt install gitlab-ce&#x3D;17.3.6-ce.0<br>升级后通过命令查看版本是否提高<br>cat &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails&#x2F;VERSION​​​​​​​​​​​​​​已升级到Gitlab漏洞影响范围外版本</p>
+<p>影响版本：8.14 ≤ GitLab &lt; 17.1.7、17.2 ≤ GitLab &lt; 17.2.5、17.3 ≤ GitLab &lt; 17.3.2<br>若当前版本在受影响范围内且未升级到修复版本，则存在风险<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/2.png"><br>4.漏洞修复</p>
+<p>        4.1版本升级<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/3.png"><br>sudo apt-cache madison gitlab-ce查看所有版本注意不要直接跨大版本升级,否则报错,需要按官方升级文档按顺序依次升级<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/4.png">apt install gitlab-ce&#x3D;xx.x.x-ce.0<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/5.png"><br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/6.png">升级后通过命令查看版本是否提高<br>cat &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails&#x2F;VERSION<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/7.png">继续重复升级,升级到不被漏洞影响的版本<br>sudo apt install gitlab-ce&#x3D;17.0.5-ce.0<br>sudo apt install gitlab-ce&#x3D;17.3.6-ce.0<br>升级后通过命令查看版本是否提高<br>cat &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails&#x2F;VERSION<img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/8.png">已升级到Gitlab漏洞影响范围外版本</p>
 <p>5.漏洞复验</p>
 <p>        5.1版本检测</p>
-<p>影响版本：8.14 ≤ GitLab &lt; 17.1.7、17.2 ≤ GitLab &lt; 17.2.5、17.3 ≤ GitLab &lt; 17.3.2<br>若当前版本不在受影响范围内或升级到修复版本，则完成修复​​​​​​​​​​​​​​</p>
+<p>影响版本：8.14 ≤ GitLab &lt; 17.1.7、17.2 ≤ GitLab &lt; 17.2.5、17.3 ≤ GitLab &lt; 17.3.2<br>若当前版本不在受影响范围内或升级到修复版本，则完成修复<img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/9.png"></p>
 <p>​</p>
 
             
