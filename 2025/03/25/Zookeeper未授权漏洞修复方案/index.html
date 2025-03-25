@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>CVE-2024-6678漏洞修复方案 | Alice01</title>
+    <title>Zookeeper未授权漏洞修复方案 | Alice01</title>
     <meta name="author" content="Alice01" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -114,14 +114,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>CVE-2024-6678漏洞修复方案</h1>
+        <h1>Zookeeper未授权漏洞修复方案</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/3/20
+            2025/3/25
         </span>
         
         
@@ -145,21 +145,34 @@
     <div class="content" v-pre>
         <p>​<br>1.漏洞简介</p>
 <p>        1.1漏洞描述</p>
-<p>GitLab 是一个基于 Git 的代码仓库管理平台</p>
-<p>攻击者可通过低权限账户或未授权访问，利用 GitLab 的访问控制机制缺陷，以其他用户身份触发 CI&#x2F;CD 管道。具体而言，漏洞涉及 GitLab 的“环境停止操作”功能权限校验不严格，允许攻击者绕过身份验证，模拟高权限用户（如项目维护者或管理员）执行环境停止操作，进而注入恶意代码或篡改流程</p>
+<p>ZooKeeper是一个分布式的，开放源码的分布式应用程序协调服务，是Google的Chubby一个开源的实现，是Hadoop和Hbase的重要组件。它是一个为分布式应用提供一致性服务的软件，提供的功能包括：配置维护、域名服务、分布式同步、组服务等。</p>
+<p>ZooKeeper默认开启在2181端口，在未进行任何访问控制情况下，攻击者可通过执行envi命令获得系统大量的敏感信息，包括系统名称、Java环境。</p>
 <p>        1.2影响范围</p>
-<p>8.14 &lt;&#x3D; GitLab CE&#x2F;EE &lt; 17.1.7</p>
-<p>17.2 &lt;&#x3D; GitLab CE&#x2F;EE &lt; 17.2.5</p>
-<p>17.3 &lt;&#x3D; GitLab CE&#x2F;EE &lt; 17.3.2</p>
+<p>ZooKeeper全版本。</p>
 <span id="more"></span>
+
 <p>2.环境搭建</p>
-<p>        2.1Linux下漏洞环境准备<br>检查版本信息，GitLab版本为16.2.1-ce，属于漏洞覆盖范围内<br>cat &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails&#x2F;VERSION<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/1.png"><br>3.漏洞验证</p>
-<p>        3.1版本检测</p>
-<p>影响版本：8.14 ≤ GitLab &lt; 17.1.7、17.2 ≤ GitLab &lt; 17.2.5、17.3 ≤ GitLab &lt; 17.3.2<br>若当前版本在受影响范围内且未升级到修复版本，则存在风险<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/2.png"><br>4.漏洞修复</p>
-<p>        4.1版本升级<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/3.png"><br>sudo apt-cache madison gitlab-ce查看所有版本注意不要直接跨大版本升级,否则报错,需要按官方升级文档按顺序依次升级<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/4.png">apt install gitlab-ce&#x3D;xx.x.x-ce.0<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/5.png"><br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/6.png">升级后通过命令查看版本是否提高<br>cat &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails&#x2F;VERSION<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/7.png">继续重复升级,升级到不被漏洞影响的版本<br>sudo apt install gitlab-ce&#x3D;17.0.5-ce.0<br>sudo apt install gitlab-ce&#x3D;17.3.6-ce.0<br>升级后通过命令查看版本是否提高<br>cat &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails&#x2F;VERSION<img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/8.png">已升级到Gitlab漏洞影响范围外版本</p>
+<p>        2.1漏洞环境搭建</p>
+<p>检查版本信息，zookeeper版本为3.4.14，属于漏洞覆盖范围内。</p>
+<p><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/1.png"></p>
+<p>3.漏洞验证</p>
+<p>        3.1.envi命令检测</p>
+<p>使用envi命令发送一个请求，判断是否返回了enviroment。</p>
+<p>echo envi|nc 192.168.230.129 2181<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/2.png"></p>
+<p>4.漏洞修复</p>
+<p>        4.1修改zoo.cfg</p>
+<p>在&#x2F;zookeeper&#x2F;config&#x2F;zoo.cfg写入一条命令白名单规则。<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/3.png"></p>
+<p>重启服务。</p>
+<p>.&#x2F;zkServer.sh stop</p>
+<p>.&#x2F;zkServer.sh start</p>
+<p><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/4.png"><br>配置白名单后,未授权已无法利用。<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/5.png"></p>
+<p>        4.2ACL配置</p>
+<p>.&#x2F;zkCli.sh<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/6.png"><br>查看acl<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/7.png"></p>
+<p>通过acl配置ip白名单为需要使用的ip。<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/8.png"><br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/9.png"></p>
 <p>5.漏洞复验</p>
-<p>        5.1版本检测</p>
-<p>影响版本：8.14 ≤ GitLab &lt; 17.1.7、17.2 ≤ GitLab &lt; 17.2.5、17.3 ≤ GitLab &lt; 17.3.2<br>若当前版本不在受影响范围内或升级到修复版本，则完成修复<img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/9.png"></p>
+<p>        5.1envi命令检测</p>
+<p>使用envi命令发送一个请求，判断是否返回了enviroment。</p>
+<p>echo envi|nc 192.168.230.129 2181<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/10.png"></p>
 <p>​</p>
 
     </div>
