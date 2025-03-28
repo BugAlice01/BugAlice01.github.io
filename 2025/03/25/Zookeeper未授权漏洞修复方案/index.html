@@ -133,7 +133,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8DSOP/" style="color: #ffa2c4">
+                <a href="/tags/%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8DSOP/" style="color: #ff7d73">
                     漏洞修复SOP
                 </a>
             </span>
@@ -143,24 +143,21 @@
     </div>
     
     <div class="content" v-pre>
-        <p>​<br>1.漏洞简介</p>
-<p>        1.1漏洞描述</p>
+        <p>​</p>
+<h2 id="1-漏洞简介"><a href="#1-漏洞简介" class="headerlink" title="1.漏洞简介"></a>1.漏洞简介</h2><p>        1.1漏洞描述</p>
 <p>ZooKeeper是一个分布式的，开放源码的分布式应用程序协调服务，是Google的Chubby一个开源的实现，是Hadoop和Hbase的重要组件。它是一个为分布式应用提供一致性服务的软件，提供的功能包括：配置维护、域名服务、分布式同步、组服务等。</p>
 <p>ZooKeeper默认开启在2181端口，在未进行任何访问控制情况下，攻击者可通过执行envi命令获得系统大量的敏感信息，包括系统名称、Java环境。</p>
 <p>        1.2影响范围</p>
 <p>ZooKeeper全版本。</p>
 <span id="more"></span>
 
-<p>2.环境搭建</p>
-<p>        2.1漏洞环境搭建</p>
+<h2 id="2-环境搭建"><a href="#2-环境搭建" class="headerlink" title="2.环境搭建"></a>2.环境搭建</h2><p>        2.1漏洞环境搭建</p>
 <p>检查版本信息，zookeeper版本为3.4.14，属于漏洞覆盖范围内。</p>
 <p><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/1.png"></p>
-<p>3.漏洞验证</p>
-<p>        3.1.envi命令检测</p>
+<h2 id="3-漏洞验证"><a href="#3-漏洞验证" class="headerlink" title="3.漏洞验证"></a>3.漏洞验证</h2><p>        3.1.envi命令检测</p>
 <p>使用envi命令发送一个请求，判断是否返回了enviroment。</p>
 <p>echo envi|nc 192.168.230.129 2181<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/2.png"></p>
-<p>4.漏洞修复</p>
-<p>        4.1修改zoo.cfg</p>
+<h2 id="4-漏洞修复"><a href="#4-漏洞修复" class="headerlink" title="4.漏洞修复"></a>4.漏洞修复</h2><p>        4.1修改zoo.cfg</p>
 <p>在&#x2F;zookeeper&#x2F;config&#x2F;zoo.cfg写入一条命令白名单规则。<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/3.png"></p>
 <p>重启服务。</p>
 <p>.&#x2F;zkServer.sh stop</p>
@@ -169,8 +166,7 @@
 <p>        4.2ACL配置</p>
 <p>.&#x2F;zkCli.sh<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/6.png"><br>查看acl<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/7.png"></p>
 <p>通过acl配置ip白名单为需要使用的ip。<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/8.png"><br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/9.png"></p>
-<p>5.漏洞复验</p>
-<p>        5.1envi命令检测</p>
+<h2 id="5-漏洞复验"><a href="#5-漏洞复验" class="headerlink" title="5.漏洞复验"></a>5.漏洞复验</h2><p>        5.1envi命令检测</p>
 <p>使用envi命令发送一个请求，判断是否返回了enviroment。</p>
 <p>echo envi|nc 192.168.230.129 2181<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/10.png"></p>
 <p>​</p>
