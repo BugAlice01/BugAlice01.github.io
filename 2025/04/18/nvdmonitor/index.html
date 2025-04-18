@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>nvdmornitor | Alice01</title>
+    <title>nvdmonitor | Alice01</title>
     <meta name="author" content="Alice01" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -114,7 +114,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>nvdmornitor</h1>
+        <h1>nvdmonitor</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -133,7 +133,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #ff7d73">
+                <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #ffa2c4">
                     工具
                 </a>
             </span>
@@ -143,11 +143,11 @@
     </div>
     
     <div class="content" v-pre>
-        <p><strong>nvdmornitor可以定时监控NVD漏洞库指定目标，并通过企业微信定时推送新增漏洞详情</strong><br><a target="_blank" rel="noopener" href="https://github.com/BugAlice01/nvdmornitor">https://github.com/BugAlice01/nvdmornitor</a><br>pip install -r requirements.txt<br>config.yaml配置扫描的参数<br>python nvdmornitor.py   <ins>单次扫描本日新增漏洞并推送到企微 </ins><br>python scheduler.py     <ins>每日定时扫描本日新增漏洞并推送到企微</ins><br>  <span id="more"></span><br><br></p>
+        <p><strong>nvdmonitor可以定时监控NVD漏洞库指定目标，并通过企业微信定时推送新增漏洞详情</strong><br><a target="_blank" rel="noopener" href="https://github.com/BugAlice01/nvdmornitor">https://github.com/BugAlice01/nvdmornitor</a><br>pip install -r requirements.txt<br>config.yaml配置扫描的参数<br>python nvdmonitor.py   <ins>单次扫描本日新增漏洞并推送到企微 </ins><br>python scheduler.py     <ins>每日定时扫描本日新增漏洞并推送到企微</ins><br>  <span id="more"></span><br><br></p>
 <h2 id="通过config-yaml修改扫描参数"><a href="#通过config-yaml修改扫描参数" class="headerlink" title="通过config.yaml修改扫描参数"></a>通过config.yaml修改扫描参数</h2><h4 id="1-产品名称配置-NVD搜索的内容"><a href="#1-产品名称配置-NVD搜索的内容" class="headerlink" title="1.产品名称配置(NVD搜索的内容)"></a>1.产品名称配置(NVD搜索的内容)</h4><p>querry: </p>
 <h4 id="2-扫描页数"><a href="#2-扫描页数" class="headerlink" title="2.扫描页数"></a>2.扫描页数</h4><p>page: 1-5</p>
 <h4 id="3-任务名称"><a href="#3-任务名称" class="headerlink" title="3.任务名称"></a>3.任务名称</h4><p>target: </p>
-<h4 id="4-企微机器人推送配置-为空则不推送"><a href="#4-企微机器人推送配置-为空则不推送" class="headerlink" title="4.企微机器人推送配置(为空则不推送)"></a>4.企微机器人推送配置(为空则不推送)</h4><p>wechat_bot:<br>  name: nvdmornitor<br>  webhook_url: “ “</p>
+<h4 id="4-企微机器人推送配置-为空则不推送"><a href="#4-企微机器人推送配置-为空则不推送" class="headerlink" title="4.企微机器人推送配置(为空则不推送)"></a>4.企微机器人推送配置(为空则不推送)</h4><p>wechat_bot:<br>  name: nvdmonitor<br>  webhook_url: “ “</p>
 <h4 id="5-调度配置"><a href="#5-调度配置" class="headerlink" title="5.调度配置"></a>5.调度配置</h4><p>scheduler:<br>  mode: “fixed”  # fixed 或 interval<br>  fixed模式配置 (每天固定时间执行)<br>  fixed_times:<br>    - “09:00”<br>    - “14:00”<br>    - “18:00”<br>  interval模式配置 (每隔几小时执行)<br>  interval_hours: 6<br><br></p>
 <p><font color="red">注意：企微推送有字数限制，如果消息过长则不能推送；通过任务日期json去重；扫描结果会存储在result</font></p>
 
