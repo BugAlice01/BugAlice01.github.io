@@ -133,7 +133,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #00a596">
+                <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #ffa2c4">
                     漏洞复现
                 </a>
             </span>
@@ -150,8 +150,6 @@
 <p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/tomcat-pass-getshell/2.png" alt="2"></p>
 <h4 id="3-上传war包"><a href="#3-上传war包" class="headerlink" title="3.上传war包"></a>3.上传war包</h4><p>&#x2F;shell&#x2F;shell.jsp为shell路径</p>
 <p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/tomcat-pass-getshell/3.png" alt="3"></p>
-<span id="more"></span>
-
 <h4 id="4-getshell"><a href="#4-getshell" class="headerlink" title="4.getshell"></a>4.getshell</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/tomcat-pass-getshell/4.jpg" alt="4"></p>
 <p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/tomcat-pass-getshell/5.jpg" alt="5"></p>
 <h2 id="二、tomcat-文件上传-CVE-2017-12615"><a href="#二、tomcat-文件上传-CVE-2017-12615" class="headerlink" title="二、tomcat 文件上传 (CVE-2017-12615)"></a>二、tomcat 文件上传 (CVE-2017-12615)</h2><h4 id="1-PUT方法探测"><a href="#1-PUT方法探测" class="headerlink" title="1.PUT方法探测"></a>1.PUT方法探测</h4><blockquote>
@@ -159,7 +157,9 @@
 </blockquote>
 <p>开启了put方法</p>
 <p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2017-12615/1.png" alt="1"></p>
-<h4 id="2-put文件写入"><a href="#2-put文件写入" class="headerlink" title="2.put文件写入"></a>2.put文件写入</h4><p>文件头：</p>
+<h4 id="2-put文件写入"><a href="#2-put文件写入" class="headerlink" title="2.put文件写入"></a>2.put文件写入</h4><span id="more"></span>
+
+<p>文件头：</p>
 <blockquote>
 <p>PUT &#x2F;shell.jsp&#x2F; HTTP&#x2F;1.1</p>
 </blockquote>
@@ -184,9 +184,10 @@
 <h4 id="2-命令执行-1"><a href="#2-命令执行-1" class="headerlink" title="2.命令执行"></a>2.命令执行</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/struts2/2.png" alt="2"></p>
 <h4 id="3-文件上传"><a href="#3-文件上传" class="headerlink" title="3.文件上传"></a>3.文件上传</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/struts2/3.png" alt="3"></p>
 <p>上传jsp到根目录后二次上传webshell</p>
-<h4 id="4-getshell-1"><a href="#4-getshell-1" class="headerlink" title="4.getshell"></a><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/struts2/4.png" alt="4">4.getshell</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/struts2/5.png" alt="5"></p>
-<h2 id="六、weblogic-反序列化-CVE-2020-2883"><a href="#六、weblogic-反序列化-CVE-2020-2883" class="headerlink" title="六、weblogic 反序列化_CVE-2020-2883"></a>六、weblogic 反序列化_CVE-2020-2883</h2><h4 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96CVE-2020-2883/1.png" alt="1"></p>
-<h2 id="七、dedecms文件上传CVE-2019-8933"><a href="#七、dedecms文件上传CVE-2019-8933" class="headerlink" title="七、dedecms文件上传CVE-2019-8933"></a>七、dedecms文件上传CVE-2019-8933</h2><h4 id="1-模版上传"><a href="#1-模版上传" class="headerlink" title="1.模版上传"></a>1.模版上传</h4><p>uploads&#x2F;dede<img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/dedecms%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0CVE-2019-8933/1.png" alt="1"></p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/struts2/4.png" alt="4"></p>
+<h4 id="4-getshell-1"><a href="#4-getshell-1" class="headerlink" title="4.getshell"></a>4.getshell</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/struts2/5.png" alt="5"></p>
+<h2 id="六、weblogic-反序列化（CVE-2020-2883）"><a href="#六、weblogic-反序列化（CVE-2020-2883）" class="headerlink" title="六、weblogic 反序列化（CVE-2020-2883）"></a>六、weblogic 反序列化（CVE-2020-2883）</h2><h4 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/weblogic%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96CVE-2020-2883/1.png" alt="1"></p>
+<h2 id="七、dedecms文件上传（CVE-2019-8933）"><a href="#七、dedecms文件上传（CVE-2019-8933）" class="headerlink" title="七、dedecms文件上传（CVE-2019-8933）"></a>七、dedecms文件上传（CVE-2019-8933）</h2><h4 id="1-模版上传"><a href="#1-模版上传" class="headerlink" title="1.模版上传"></a>1.模版上传</h4><p>uploads&#x2F;dede<img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/dedecms%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0CVE-2019-8933/1.png" alt="1"></p>
 <p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-8933/2.png" alt="2"></p>
 <h4 id="2-代码解析"><a href="#2-代码解析" class="headerlink" title="2.代码解析"></a>2.代码解析</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-8933/3.png" alt="3"></p>
 <p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2019-8933/4.png" alt="4"></p>
@@ -254,7 +255,8 @@
 <blockquote>
 <p>python3 sqlmap.py -u “<a target="_blank" rel="noopener" href="http://taie.hantaosec.com:34150/doctorlogin.php">http://taie.hantaosec.com:34150/doctorlogin.php</a>“ –data&#x3D;”loginid&#x3D;admin&amp;password&#x3D;123456789&amp;rememberme&#x3D;on&amp;submit&#x3D;Login” -D mysql -T user -C password –dump</p>
 </blockquote>
-<h4 id=""><a href="#" class="headerlink" title=""></a><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HMSv1.0SQL%E6%B3%A8%E5%85%A5/4.png" alt="4"></h4><p>密码*81F5E21E35407D884A6CD4A731AEBFB6AF209E1B</p>
+<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HMSv1.0SQL%E6%B3%A8%E5%85%A5/4.png" alt="4"></p>
+<p>密码*81F5E21E35407D884A6CD4A731AEBFB6AF209E1B</p>
 <p>解密为root<img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HMSv1.0SQL%E6%B3%A8%E5%85%A5/5.png" alt="5"></p>
 <h4 id="4-数据库连接"><a href="#4-数据库连接" class="headerlink" title="4.数据库连接"></a>4.数据库连接</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/HMSv1.0SQL%E6%B3%A8%E5%85%A5/6.png" alt="6"></p>
 <p>5.后利用</p>
