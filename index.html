@@ -274,11 +274,72 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #ff7d73">漏洞复现</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #00a596">漏洞复现</a>
         </span>
         
     </div>
     <a href="/2025/06/19/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
+    <a href="/2025/06/19/c2%E5%9F%BA%E5%BB%BA/">
+        <h2 class="post-title">c2基建</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/6/19
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="1-Linxu上线"><a href="#1-Linxu上线" class="headerlink" title="1.Linxu上线"></a>1.Linxu上线</h2><p>genCrossC2.xxx 上传到服务端并chmod权限<br>cna中修改第一个路径为绝对路径</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/1.jpg" alt="1">加载crossc2插件</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/2.jpg" alt="2">将服务端 。cobaltstrike.beacon_keys下载至客户端cs目录下（默认隐藏，需解除)</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/3.jpg" alt="3">crossc2仅支持https监听<img src="/images/c2%E5%9F%BA%E5%BB%BA/4.jpg" alt="4"></p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/5.jpg" alt="5"><img src="/images/c2%E5%9F%BA%E5%BB%BA/6.jpg" alt="6">客户端生成linuxpayload</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/7.jpg" alt="7"></p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/8.jpg" alt="8"></p>
+<p>上线</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/9.jpg" alt="9"></p>
+<h2 id="2-cs-msf派生"><a href="#2-cs-msf派生" class="headerlink" title="2.cs-msf派生"></a>2.cs-msf派生</h2><p><img src="/images/c2%E5%9F%BA%E5%BB%BA/10.jpg" alt="10"></p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/11.jpg" alt="11"></p>
+<h2 id="3-C2隐匿"><a href="#3-C2隐匿" class="headerlink" title="3.C2隐匿"></a><img src="/images/c2%E5%9F%BA%E5%BB%BA/13.jpg" alt="12">3.C2隐匿</h2><h4 id="3-1修改默认端口"><a href="#3-1修改默认端口" class="headerlink" title="3.1修改默认端口"></a>3.1修改默认端口<img src="/images/c2%E5%9F%BA%E5%BB%BA/14.jpg" alt="14"><img src="/images/c2%E5%9F%BA%E5%BB%BA/15.jpg" alt="15"></h4><h4 id="3-2证书隐藏"><a href="#3-2证书隐藏" class="headerlink" title="3.2证书隐藏"></a>3.2证书隐藏</h4><p>先查看cs证书<br> keytool -list -v -keystore cobaltstrike.store<br>发现包含多条cs名称<img src="/images/c2%E5%9F%BA%E5%BB%BA/16.jpg" alt="16"></p>
+<p>生成伪装的新cs证书并查看特特征<br>keytool -keystore cobaltstrike.store -storepass 123456 -keypass 123456 -genkey -keyalg RSA -alias 360.com -dname “CN&#x3D;US, OU&#x3D;360.com, O&#x3D;Sofaware, L&#x3D;Somewhere, ST&#x3D;Cyberspace, C&#x3D;CN”</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/17.jpg" alt="17">替换旧证书<img src="/images/c2%E5%9F%BA%E5%BB%BA/18.jpg" alt="18"></p>
+<h4 id="3-3cs-profile"><a href="#3-3cs-profile" class="headerlink" title="3.3cs_profile"></a>3.3cs_profile</h4><p>profile编写<img src="/images/c2%E5%9F%BA%E5%BB%BA/19.jpg" alt="19"></p>
+<p>profile使用</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/20.jpg" alt="20"></p>
+<h4 id="3-4http跳板机重定向"><a href="#3-4http跳板机重定向" class="headerlink" title="3.4http跳板机重定向"></a>3.4http跳板机重定向</h4><p><img src="/images/c2%E5%9F%BA%E5%BB%BA/21.jpg" alt="21"></p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/22.jpg" alt="21"></p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/23.jpg" alt="21"></p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/24.jpg" alt="21"></p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/25.jpg" alt="21"></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E7%BA%A2%E9%98%9F%E5%9F%BA%E5%BB%BA/" style="color: #00a596">红队基建</a>
+        </span>
+        
+    </div>
+    <a href="/2025/06/19/c2%E5%9F%BA%E5%BB%BA/" class="go-post">阅读全文</a>
 </div>
 
 <div class="post">
@@ -313,7 +374,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #00a596">工具</a>
+            <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #ffa2c4">工具</a>
         </span>
         
     </div>
@@ -360,7 +421,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%B7%A5%E5%85%B7SOP/" style="color: #03a9f4">工具SOP</a>
+            <a href="/tags/%E5%B7%A5%E5%85%B7SOP/" style="color: #00bcd4">工具SOP</a>
         </span>
         
     </div>
@@ -408,7 +469,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%B7%A5%E5%85%B7SOP/" style="color: #00bcd4">工具SOP</a>
+            <a href="/tags/%E5%B7%A5%E5%85%B7SOP/" style="color: #03a9f4">工具SOP</a>
         </span>
         
     </div>
@@ -450,7 +511,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8DSOP/" style="color: #00a596">漏洞修复SOP</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8DSOP/" style="color: #ffa2c4">漏洞修复SOP</a>
         </span>
         
     </div>
@@ -537,51 +598,11 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8DSOP/" style="color: #ff7d73">漏洞修复SOP</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8DSOP/" style="color: #03a9f4">漏洞修复SOP</a>
         </span>
         
     </div>
     <a href="/2025/03/21/CVE-2022-22947%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/03/20/CVE-2024-38077%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/">
-        <h2 class="post-title">CVE-2024-38077漏洞修复方案</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/3/20
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="1-漏洞简介"><a href="#1-漏洞简介" class="headerlink" title="1.漏洞简介"></a>1.漏洞简介</h2><h4 id="1-1漏洞描述"><a href="#1-1漏洞描述" class="headerlink" title="1.1漏洞描述"></a>1.1漏洞描述</h4><p>根据微软最新披露的远程代码执行超高危漏洞CVE-2024-38077， CVSS评分高达9.8 ，可导致开启了远程桌面许可服务的Windwos服务器完全沦陷。攻击者无需任何前置条件，无需用户交互（零点击）便可直接获取服务器最高权限，执行任意操作。漏洞影响Windows Server 2000到Windows Server 2025所有版本，这一漏洞存在于Windows远程桌面许可管理服务（RDL）中，该服务被广泛部署于开启Windows远程桌面（3389端口）的服务器，用于管理远程桌面连接许可。</p>
-<h4 id="1-2影响范围"><a href="#1-2影响范围" class="headerlink" title="1.2影响范围"></a>1.2影响范围</h4><p>Windows Server 2000到Windows Server 2025所有版本。</p>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8DSOP/" style="color: #ff7d73">漏洞修复SOP</a>
-        </span>
-        
-    </div>
-    <a href="/2025/03/20/CVE-2024-38077%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/" class="go-post">阅读全文</a>
 </div>
 
 
