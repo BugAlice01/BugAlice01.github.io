@@ -133,7 +133,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E7%BA%A2%E9%98%9F%E5%9F%BA%E5%BB%BA/" style="color: #03a9f4">
+                <a href="/tags/%E7%BA%A2%E9%98%9F%E5%9F%BA%E5%BB%BA/" style="color: #ffa2c4">
                     红队基建
                 </a>
             </span>
@@ -154,7 +154,10 @@
 <p><img src="/images/c2%E5%9F%BA%E5%BB%BA/9.jpg" alt="9"></p>
 <h2 id="2-cs-msf派生"><a href="#2-cs-msf派生" class="headerlink" title="2.cs-msf派生"></a>2.cs-msf派生</h2><p><img src="/images/c2%E5%9F%BA%E5%BB%BA/10.jpg" alt="10"></p>
 <p><img src="/images/c2%E5%9F%BA%E5%BB%BA/11.jpg" alt="11"></p>
-<h2 id="3-C2隐匿"><a href="#3-C2隐匿" class="headerlink" title="3.C2隐匿"></a><img src="/images/c2%E5%9F%BA%E5%BB%BA/13.jpg" alt="12">3.C2隐匿</h2><h4 id="3-1修改默认端口"><a href="#3-1修改默认端口" class="headerlink" title="3.1修改默认端口"></a>3.1修改默认端口<img src="/images/c2%E5%9F%BA%E5%BB%BA/14.jpg" alt="14"><img src="/images/c2%E5%9F%BA%E5%BB%BA/15.jpg" alt="15"></h4><h4 id="3-2证书隐藏"><a href="#3-2证书隐藏" class="headerlink" title="3.2证书隐藏"></a>3.2证书隐藏</h4><p>先查看cs证书<br> keytool -list -v -keystore cobaltstrike.store<br>发现包含多条cs名称<img src="/images/c2%E5%9F%BA%E5%BB%BA/16.jpg" alt="16"></p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/13.jpg" alt="12"></p>
+<h2 id="3-C2隐匿"><a href="#3-C2隐匿" class="headerlink" title="3.C2隐匿"></a>3.C2隐匿</h2><span id="more"></span>
+
+<h4 id="3-1修改默认端口"><a href="#3-1修改默认端口" class="headerlink" title="3.1修改默认端口"></a>3.1修改默认端口<img src="/images/c2%E5%9F%BA%E5%BB%BA/14.jpg" alt="14"><img src="/images/c2%E5%9F%BA%E5%BB%BA/15.jpg" alt="15"></h4><h4 id="3-2证书隐藏"><a href="#3-2证书隐藏" class="headerlink" title="3.2证书隐藏"></a>3.2证书隐藏</h4><p>先查看cs证书<br> keytool -list -v -keystore cobaltstrike.store<br>发现包含多条cs名称<img src="/images/c2%E5%9F%BA%E5%BB%BA/16.jpg" alt="16"></p>
 <p>生成伪装的新cs证书并查看特特征<br>keytool -keystore cobaltstrike.store -storepass 123456 -keypass 123456 -genkey -keyalg RSA -alias 360.com -dname “CN&#x3D;US, OU&#x3D;360.com, O&#x3D;Sofaware, L&#x3D;Somewhere, ST&#x3D;Cyberspace, C&#x3D;CN”</p>
 <p><img src="/images/c2%E5%9F%BA%E5%BB%BA/17.jpg" alt="17">替换旧证书<img src="/images/c2%E5%9F%BA%E5%BB%BA/18.jpg" alt="18"></p>
 <h4 id="3-3cs-profile"><a href="#3-3cs-profile" class="headerlink" title="3.3cs_profile"></a>3.3cs_profile</h4><p>profile编写<img src="/images/c2%E5%9F%BA%E5%BB%BA/19.jpg" alt="19"></p>
