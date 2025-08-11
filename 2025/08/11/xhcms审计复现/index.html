@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Zookeeper未授权漏洞修复方案 | Alice01</title>
+    <title>xhcms审计复现 | Alice01</title>
     <meta name="author" content="Alice01" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -114,14 +114,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>Zookeeper未授权漏洞修复方案</h1>
+        <h1>xhcms审计复现</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/3/25
+            2025/8/11
         </span>
         
         
@@ -133,8 +133,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8DSOP/" style="color: #ffa2c4">
-                    漏洞修复SOP
+                <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #03a9f4">
+                    审计
                 </a>
             </span>
             
@@ -143,26 +143,20 @@
     </div>
     
     <div class="content" v-pre>
-        <p>​</p>
-<h2 id="1-漏洞简介"><a href="#1-漏洞简介" class="headerlink" title="1.漏洞简介"></a>1.漏洞简介</h2><h4 id="1-1漏洞描述"><a href="#1-1漏洞描述" class="headerlink" title="1.1漏洞描述"></a>1.1漏洞描述</h4><p>ZooKeeper是一个分布式的，开放源码的分布式应用程序协调服务，是Google的Chubby一个开源的实现，是Hadoop和Hbase的重要组件。它是一个为分布式应用提供一致性服务的软件，提供的功能包括：配置维护、域名服务、分布式同步、组服务等。</p>
-<p>ZooKeeper默认开启在2181端口，在未进行任何访问控制情况下，攻击者可通过执行envi命令获得系统大量的敏感信息，包括系统名称、Java环境。</p>
-<h4 id="1-2影响范围"><a href="#1-2影响范围" class="headerlink" title="1.2影响范围"></a>1.2影响范围</h4><p>ZooKeeper全版本。</p>
+        <h2 id="1-index-php-file存在文件包含，addslash无法防文件包含"><a href="#1-index-php-file存在文件包含，addslash无法防文件包含" class="headerlink" title="1.index.php(file存在文件包含，addslash无法防文件包含)"></a>1.index.php(file存在文件包含，addslash无法防文件包含)</h2><h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>addslash(单双引号反斜杠NULL前加\)</p>
+<h4 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h4><p><strong>$file</strong>&#x3D;addslashes($_GET[‘r’]); &#x2F;&#x2F;接收文件名<br><strong>$action&#x3D;$file</strong>&#x3D;&#x3D;’’?’index’:$file; &#x2F;&#x2F;判断为空或者等于index<br>include(‘files&#x2F;‘<strong>.$action.</strong>‘.php’); &#x2F;&#x2F;载入相应文件</p>
 <span id="more"></span>
 
-<h2 id="2-环境搭建"><a href="#2-环境搭建" class="headerlink" title="2.环境搭建"></a>2.环境搭建</h2><h4 id="2-1漏洞环境搭建"><a href="#2-1漏洞环境搭建" class="headerlink" title="2.1漏洞环境搭建"></a>2.1漏洞环境搭建</h4><p>检查版本信息，zookeeper版本为3.4.14，属于漏洞覆盖范围内。</p>
-<p><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/1.png"></p>
-<h2 id="3-漏洞验证"><a href="#3-漏洞验证" class="headerlink" title="3.漏洞验证"></a>3.漏洞验证</h2><h4 id="3-1-envi命令检测"><a href="#3-1-envi命令检测" class="headerlink" title="3.1.envi命令检测"></a>3.1.envi命令检测</h4><p>使用envi命令发送一个请求，判断是否返回了enviroment。</p>
-<p>echo envi|nc 192.168.230.129 2181<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/2.png"></p>
-<h2 id="4-漏洞修复"><a href="#4-漏洞修复" class="headerlink" title="4.漏洞修复"></a>4.漏洞修复</h2><h4 id="4-1修改zoo-cfg"><a href="#4-1修改zoo-cfg" class="headerlink" title="4.1修改zoo.cfg"></a>4.1修改zoo.cfg</h4><p>在&#x2F;zookeeper&#x2F;config&#x2F;zoo.cfg写入一条命令白名单规则。<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/3.png"></p>
-<p>重启服务。</p>
-<p>.&#x2F;zkServer.sh stop</p>
-<p>.&#x2F;zkServer.sh start</p>
-<p><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/4.png"><br>配置白名单后,未授权已无法利用。<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/5.png"></p>
-<h4 id="4-2ACL配置"><a href="#4-2ACL配置" class="headerlink" title="4.2ACL配置"></a>4.2ACL配置</h4><p>.&#x2F;zkCli.sh<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/6.png"><br>查看acl<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/7.png"></p>
-<p>通过acl配置ip白名单为需要使用的ip。<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/8.png"><br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/9.png"></p>
-<h2 id="5-漏洞复验"><a href="#5-漏洞复验" class="headerlink" title="5.漏洞复验"></a>5.漏洞复验</h2><h4 id="5-1envi命令检测"><a href="#5-1envi命令检测" class="headerlink" title="5.1envi命令检测"></a>5.1envi命令检测</h4><p>使用envi命令发送一个请求，判断是否返回了enviroment。</p>
-<p>echo envi|nc 192.168.230.129 2181<br><img src="/images/Zookeeper%E6%9C%AA%E6%8E%88%E6%9D%83%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/10.png"></p>
-<p>​</p>
+<h2 id="2-inc-checklogin-php-cookie伪造登录"><a href="#2-inc-checklogin-php-cookie伪造登录" class="headerlink" title="2.inc&#x2F;checklogin.php(cookie伪造登录)"></a>2.inc&#x2F;checklogin.php(cookie伪造登录)</h2><h4 id="语句-1"><a href="#语句-1" class="headerlink" title="语句"></a>语句</h4><p>&lt;?php<br>$user&#x3D;$_COOKIE[‘user’];<br>if ($user&#x3D;&#x3D;””){<br>header(“Location: ?r&#x3D;login”);<br>exit;	<br>}<br>?&gt;</p>
+<h2 id="3-admin-files-wzlist-php-csrf-文章删除"><a href="#3-admin-files-wzlist-php-csrf-文章删除" class="headerlink" title="3.admin&#x2F;files&#x2F;wzlist.php(csrf-文章删除)"></a>3.admin&#x2F;files&#x2F;wzlist.php(csrf-文章删除)</h2><h4 id="语句-2"><a href="#语句-2" class="headerlink" title="语句"></a>语句</h4><p><strong>$delete&#x3D;$_GET[‘delete’];</strong><br>if ($delete&lt;&gt;””){<br>$query &#x3D; “DELETE FROM content <strong>WHERE id&#x3D;’$delete’”</strong>;</p>
+<h2 id="4-admin-files-editlink-php-id参数sql注入"><a href="#4-admin-files-editlink-php-id参数sql注入" class="headerlink" title="4.admin&#x2F;files&#x2F;editlink.php(id参数sql注入)"></a>4.admin&#x2F;files&#x2F;editlink.php(id参数sql注入)</h2><h4 id="语句-3"><a href="#语句-3" class="headerlink" title="语句"></a>语句</h4><p><strong>$id&#x3D;$_GET[‘id’];</strong><br>$type&#x3D;$_GET[‘type’];<br>if ($type&#x3D;&#x3D;1){<br>$query &#x3D; “SELECT * FROM nav <strong>WHERE id&#x3D;’$id’”;</strong></p>
+<h2 id="5-files-download-php-id参数sql注入"><a href="#5-files-download-php-id参数sql注入" class="headerlink" title="5.files&#x2F;download.php(id参数sql注入)"></a>5.files&#x2F;download.php(id参数sql注入)</h2><h4 id="语句-4"><a href="#语句-4" class="headerlink" title="语句"></a>语句</h4><p>$query &#x3D; “SELECT * FROM nav <strong>WHERE link&#x3D;’$llink’”</strong>;</p>
+<h2 id="6-admin-files-login-php-user参数存在sql注入"><a href="#6-admin-files-login-php-user参数存在sql注入" class="headerlink" title="6.admin&#x2F;files&#x2F;login.php(user参数存在sql注入)"></a>6.admin&#x2F;files&#x2F;login.php(user参数存在sql注入)</h2><h4 id="语句-5"><a href="#语句-5" class="headerlink" title="语句"></a>语句</h4><p><strong>$user&#x3D;$_POST[‘user’];</strong><br>$query &#x3D; “SELECT * FROM manage <strong>WHERE user&#x3D;’$user’”</strong>;</p>
+<h2 id="7-file-contact-php-xss"><a href="#7-file-contact-php-xss" class="headerlink" title="7. file&#x2F;contact.php(xss)"></a>7. file&#x2F;contact.php(xss)</h2><h4 id="语句-6"><a href="#语句-6" class="headerlink" title="语句"></a>语句</h4><p>$page&#x3D;<strong>addslashes(</strong>$_GET[‘page’]);    </p>
+<p>&lt;?php **echo $page**?&gt; </p>
+<h2 id="8-files-contents-php-多个xss"><a href="#8-files-contents-php-多个xss" class="headerlink" title="8.files&#x2F;contents.php(多个xss)"></a>8.files&#x2F;contents.php(多个xss)</h2><h4 id="语句-7"><a href="#语句-7" class="headerlink" title="语句"></a>语句</h4><p>&lt;li&gt;<span>昵称</span>&lt;input name&#x3D;”name” type&#x3D;”text” value&#x3D;”&lt;?php **echo $_COOKIE[‘name’]**?&gt;” &#x2F;&gt;&lt;&#x2F;li&gt;<br>&lt;li&gt;<span>邮箱</span>&lt;input name&#x3D;”mail” type&#x3D;”text” value&#x3D;”&lt;?php **echo $_COOKIE[‘mail’]**?&gt;”&#x2F;&gt;&lt;&#x2F;li&gt;<br>&lt;li&gt;<span>网址</span>&lt;input name&#x3D;”url” type&#x3D;”text” value&#x3D;”&lt;?php **echo $_COOKIE[‘url’]**?&gt;”&#x2F;&gt;&lt;&#x2F;li&gt;</p>
+<h2 id="9-admin-files-commentlist-php-title参数xss"><a href="#9-admin-files-commentlist-php-title参数xss" class="headerlink" title="9.admin&#x2F;files&#x2F;commentlist.php(title参数xss)"></a>9.admin&#x2F;files&#x2F;commentlist.php(title参数xss)</h2><h4 id="语句-8"><a href="#语句-8" class="headerlink" title="语句"></a>语句</h4><p>$fl_id&#x3D;$list[‘cid’];<br>$query1 &#x3D; “SELECT * FROM $biao WHERE id&#x3D;’$fl_id’”;<br>$resul1 &#x3D; mysql_query($query1) or die(‘SQL语句有误：’.mysql_error());<br><strong>$contentname</strong> &#x3D; mysql_fetch_array($resul1); </p>
+<p>&lt;td&gt;&lt;?php **echo $contentname [‘title’]**;?&gt;&lt;&#x2F;td&gt;</p>
 
     </div>
     
