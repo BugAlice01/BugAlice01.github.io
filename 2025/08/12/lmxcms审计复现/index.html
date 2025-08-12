@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>xhcms审计复现 | Alice01</title>
+    <title>lmxcms审计复现 | Alice01</title>
     <meta name="author" content="Alice01" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -114,14 +114,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>xhcms审计复现</h1>
+        <h1>lmxcms审计复现</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/8/11
+            2025/8/12
         </span>
         
         
@@ -133,7 +133,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #03a9f4">
+                <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #ffa2c4">
                     审计
                 </a>
             </span>
@@ -143,20 +143,11 @@
     </div>
     
     <div class="content" v-pre>
-        <h2 id="1-index-php-file存在文件包含，addslash无法防文件包含"><a href="#1-index-php-file存在文件包含，addslash无法防文件包含" class="headerlink" title="1.index.php(file存在文件包含，addslash无法防文件包含)"></a>1.index.php(file存在文件包含，addslash无法防文件包含)</h2><h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>addslash(单双引号反斜杠NULL前加\)</p>
-<h4 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h4><p><strong>$file</strong>&#x3D;addslashes($_GET[‘r’]); &#x2F;&#x2F;接收文件名<br><strong>$action&#x3D;$file</strong>&#x3D;&#x3D;’’?’index’:$file; &#x2F;&#x2F;判断为空或者等于index<br>include(‘files&#x2F;‘<strong>.$action.</strong>‘.php’); &#x2F;&#x2F;载入相应文件</p>
-<span id="more"></span>
-
-<h2 id="2-inc-checklogin-php-cookie伪造登录"><a href="#2-inc-checklogin-php-cookie伪造登录" class="headerlink" title="2.inc&#x2F;checklogin.php(cookie伪造登录)"></a>2.inc&#x2F;checklogin.php(cookie伪造登录)</h2><h4 id="语句-1"><a href="#语句-1" class="headerlink" title="语句"></a>语句</h4><p>&lt;?php<br>$user&#x3D;$_COOKIE[‘user’];<br>if ($user&#x3D;&#x3D;””){<br>header(“Location: ?r&#x3D;login”);<br>exit;	<br>}<br>?&gt;</p>
-<h2 id="3-admin-files-wzlist-php-csrf-文章删除"><a href="#3-admin-files-wzlist-php-csrf-文章删除" class="headerlink" title="3.admin&#x2F;files&#x2F;wzlist.php(csrf-文章删除)"></a>3.admin&#x2F;files&#x2F;wzlist.php(csrf-文章删除)</h2><h4 id="语句-2"><a href="#语句-2" class="headerlink" title="语句"></a>语句</h4><p><strong>$delete&#x3D;$_GET[‘delete’];</strong><br>if ($delete&lt;&gt;””){<br>$query &#x3D; “DELETE FROM content <strong>WHERE id&#x3D;’$delete’”</strong>;</p>
-<h2 id="4-admin-files-editlink-php-id参数sql注入"><a href="#4-admin-files-editlink-php-id参数sql注入" class="headerlink" title="4.admin&#x2F;files&#x2F;editlink.php(id参数sql注入)"></a>4.admin&#x2F;files&#x2F;editlink.php(id参数sql注入)</h2><h4 id="语句-3"><a href="#语句-3" class="headerlink" title="语句"></a>语句</h4><p><strong>$id&#x3D;$_GET[‘id’];</strong><br>$type&#x3D;$_GET[‘type’];<br>if ($type&#x3D;&#x3D;1){<br>$query &#x3D; “SELECT * FROM nav <strong>WHERE id&#x3D;’$id’”;</strong></p>
-<h2 id="5-files-download-php-id参数sql注入"><a href="#5-files-download-php-id参数sql注入" class="headerlink" title="5.files&#x2F;download.php(id参数sql注入)"></a>5.files&#x2F;download.php(id参数sql注入)</h2><h4 id="语句-4"><a href="#语句-4" class="headerlink" title="语句"></a>语句</h4><p>$query &#x3D; “SELECT * FROM nav <strong>WHERE link&#x3D;’$llink’”</strong>;</p>
-<h2 id="6-admin-files-login-php-user参数存在sql注入"><a href="#6-admin-files-login-php-user参数存在sql注入" class="headerlink" title="6.admin&#x2F;files&#x2F;login.php(user参数存在sql注入)"></a>6.admin&#x2F;files&#x2F;login.php(user参数存在sql注入)</h2><h4 id="语句-5"><a href="#语句-5" class="headerlink" title="语句"></a>语句</h4><p><strong>$user&#x3D;$_POST[‘user’];</strong><br>$query &#x3D; “SELECT * FROM manage <strong>WHERE user&#x3D;’$user’”</strong>;</p>
-<h2 id="7-file-contact-php-xss"><a href="#7-file-contact-php-xss" class="headerlink" title="7. file&#x2F;contact.php(xss)"></a>7. file&#x2F;contact.php(xss)</h2><h4 id="语句-6"><a href="#语句-6" class="headerlink" title="语句"></a>语句</h4><p>$page&#x3D;<strong>addslashes(</strong>$_GET[‘page’]);    </p>
-<p>&lt;?php **echo $page**?&gt; </p>
-<h2 id="8-files-contents-php-多个xss"><a href="#8-files-contents-php-多个xss" class="headerlink" title="8.files&#x2F;contents.php(多个xss)"></a>8.files&#x2F;contents.php(多个xss)</h2><h4 id="语句-7"><a href="#语句-7" class="headerlink" title="语句"></a>语句</h4><p>&lt;li&gt;<span>昵称</span>&lt;input name&#x3D;”name” type&#x3D;”text” value&#x3D;”&lt;?php **echo $_COOKIE[‘name’]**?&gt;” &#x2F;&gt;&lt;&#x2F;li&gt;<br>&lt;li&gt;<span>邮箱</span>&lt;input name&#x3D;”mail” type&#x3D;”text” value&#x3D;”&lt;?php **echo $_COOKIE[‘mail’]**?&gt;”&#x2F;&gt;&lt;&#x2F;li&gt;<br>&lt;li&gt;<span>网址</span>&lt;input name&#x3D;”url” type&#x3D;”text” value&#x3D;”&lt;?php **echo $_COOKIE[‘url’]**?&gt;”&#x2F;&gt;&lt;&#x2F;li&gt;</p>
-<h2 id="9-admin-files-commentlist-php-title参数xss"><a href="#9-admin-files-commentlist-php-title参数xss" class="headerlink" title="9.admin&#x2F;files&#x2F;commentlist.php(title参数xss)"></a>9.admin&#x2F;files&#x2F;commentlist.php(title参数xss)</h2><h4 id="语句-8"><a href="#语句-8" class="headerlink" title="语句"></a>语句</h4><p>$fl_id&#x3D;$list[‘cid’];<br>$query1 &#x3D; “SELECT * FROM $biao WHERE id&#x3D;’$fl_id’”;<br>$resul1 &#x3D; mysql_query($query1) or die(‘SQL语句有误：’.mysql_error());<br><strong>$contentname</strong> &#x3D; mysql_fetch_array($resul1); </p>
-<p>&lt;td&gt;&lt;?php **echo $contentname [‘title’]**;?&gt;&lt;&#x2F;td&gt;</p>
+        <h2 id="MVC定位"><a href="#MVC定位" class="headerlink" title="MVC定位"></a>MVC定位</h2><h4 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h4><p>&#x2F;index.php?m&#x3D;目标model前缀&amp;a&#x3D;目标action前缀&amp;参数变量&#x3D;xx</p>
+<h4 id="model定位"><a href="#model定位" class="headerlink" title="model定位"></a>model定位</h4><p>&#x2F;m<br><img src="/images/lmxcms%E5%AE%A1%E8%AE%A1%E5%A4%8D%E7%8E%B0/m.png" alt="m"></p>
+<h4 id="View定位"><a href="#View定位" class="headerlink" title="View定位"></a>View定位</h4><p>&#x2F;template&#x2F;default<br><img src="/images/lmxcms%E5%AE%A1%E8%AE%A1%E5%A4%8D%E7%8E%B0/v.png" alt="v"></p>
+<h4 id="controller定位"><a href="#controller定位" class="headerlink" title="controller定位"></a>controller定位</h4><p>&#x2F;c<br><img src="/images/lmxcms%E5%AE%A1%E8%AE%A1%E5%A4%8D%E7%8E%B0/c.png" alt="c"></p>
+<h2 id="BookAction-class-php"><a href="#BookAction-class-php" class="headerlink" title="BookAction.class.php()"></a>BookAction.class.php()</h2><h4 id="路由-1"><a href="#路由-1" class="headerlink" title="路由"></a>路由</h4><p><strong>&#x2F;admin.php?m&#x3D;book&amp;a&#x3D;index</strong>[路由说明: admin.php为&#x2F;c&#x2F;admin&#x2F;AdminAction.class.php; book为&#x2F;c&#x2F;admin&#x2F;BookAction.class.php与&#x2F;m&#x2F;BookModel.class.php; index为&#x2F;c&#x2F;admin&#x2F;BookModel.class.php中的()方法]</p>
 
     </div>
     

