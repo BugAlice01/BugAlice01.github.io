@@ -156,9 +156,16 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h2 id="MVC定位"><a href="#MVC定位" class="headerlink" title="MVC定位"></a>MVC定位</h2><h4 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h4><p>&#x2F;index.php?m&#x3D;目标model前缀&amp;a&#x3D;目标action前缀&amp;参数变量&#x3D;xx</p>
-<p>例如&#x2F;admin.php?m&#x3D;book&amp;a&#x3D;index<br><em>[路由分析: admin.php为&#x2F;c&#x2F;admin&#x2F;AdminAction.class.php;<br>book为&#x2F;c&#x2F;admin&#x2F;BookAction.class.php与&#x2F;m&#x2F;BookModel.class.php;<br>index为&#x2F;c&#x2F;admin&#x2F;BookModel.class.php中的()方法]</em></p>
-<h4 id="model定位"><a href="#model定位" class="headerlink" title="model定位"></a>model定位</h4><p>&#x2F;m<br><img src="/images/lmxcms%E5%AE%A1%E8%AE%A1%E5%A4%8D%E7%8E%B0/m.png" alt="m"></p>
+            <h2 id="MVC定位"><a href="#MVC定位" class="headerlink" title="MVC定位"></a>MVC定位</h2><h4 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h4><blockquote>
+<p>&#x2F;index.php?m&#x3D;目标model前缀&amp;a&#x3D;目标action前缀&amp;参数变量&#x3D;xx</p>
+</blockquote>
+<blockquote>
+<p>如&#x2F;admin.php?m&#x3D;book&amp;a&#x3D;index<br><em>[路由分析: admin.php为&#x2F;c&#x2F;admin&#x2F;AdminAction.class.php;<br>book为&#x2F;c&#x2F;admin&#x2F;BookAction.class.php与&#x2F;m&#x2F;BookModel.class.php;<br>index为&#x2F;c&#x2F;admin&#x2F;BookModel.class.php中的()方法]</em></p>
+</blockquote>
+<h4 id="model定位"><a href="#model定位" class="headerlink" title="model定位"></a>model定位</h4><blockquote>
+<p>&#x2F;m</p>
+</blockquote>
+<p><img src="/images/lmxcms%E5%AE%A1%E8%AE%A1%E5%A4%8D%E7%8E%B0/m.png" alt="m"></p>
 <h4 id="View定位"><a href="#View定位" class="headerlink" title="View定位"></a>View定位</h4>
             
         </div>
@@ -173,7 +180,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #ff7d73">审计</a>
+            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #00bcd4">审计</a>
         </span>
         
     </div>
@@ -199,7 +206,9 @@
         <div class="content" v-pre>
             
             <h2 id="1-index-php-file存在文件包含，addslash无法防文件包含"><a href="#1-index-php-file存在文件包含，addslash无法防文件包含" class="headerlink" title="1.index.php(file存在文件包含，addslash无法防文件包含)"></a>1.index.php(file存在文件包含，addslash无法防文件包含)</h2><h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>addslash(单双引号反斜杠NULL前加\)</p>
-<h4 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h4><p><strong>$file</strong>&#x3D;addslashes($_GET[‘r’]); &#x2F;&#x2F;接收文件名<br><strong>$action&#x3D;$file</strong>&#x3D;&#x3D;’’?’index’:$file; &#x2F;&#x2F;判断为空或者等于index<br>include(‘files&#x2F;‘<strong>.$action.</strong>‘.php’); &#x2F;&#x2F;载入相应文件</p>
+<h4 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h4><blockquote>
+<p><strong>$file</strong>&#x3D;addslashes($_GET[‘r’]); &#x2F;&#x2F;接收文件名<br><strong>$action&#x3D;$file</strong>&#x3D;&#x3D;’’?’index’:$file; &#x2F;&#x2F;判断为空或者等于index<br>include(‘files&#x2F;‘<strong>.$action.</strong>‘.php’); &#x2F;&#x2F;载入相应文件</p>
+</blockquote>
 <h2 id="2-inc-checklogin-php-cookie伪造登录"><a href="#2-inc-checklogin-php-cookie伪造登录" class="headerlink" title="2.inc&#x2F;checklogin.php(cookie伪造登录)"></a>2.inc&#x2F;checklogin.php(cookie伪造登录)</h2>
             
         </div>
@@ -214,7 +223,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #ffa2c4">审计</a>
+            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #00a596">审计</a>
         </span>
         
     </div>
@@ -239,8 +248,12 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <h2 id="1-ad-js-php-ad-id存在sql注入因为拼接无单引号，可以绕过魔术引号转译"><a href="#1-ad-js-php-ad-id存在sql注入因为拼接无单引号，可以绕过魔术引号转译" class="headerlink" title="1.ad_js.php(ad_id存在sql注入因为拼接无单引号，可以绕过魔术引号转译)"></a>1.ad_js.php(ad_id存在sql注入因为拼接无单引号，可以绕过魔术引号转译)</h2><h4 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h4><p>​	$ad_id &#x3D; !empty($_GET[‘ad_id’]) ? trim($_GET[‘ad_id’]) : ‘’;</p>
-<h4 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h4><p>​	$ad &#x3D; $db-&gt;getone(“SELECT * FROM “.table(‘ad’).” WHERE ad_id &#x3D;<strong>“.$ad_id</strong>);</p>
+            <h2 id="1-ad-js-php-ad-id存在sql注入因为拼接无单引号，可以绕过魔术引号转译"><a href="#1-ad-js-php-ad-id存在sql注入因为拼接无单引号，可以绕过魔术引号转译" class="headerlink" title="1.ad_js.php(ad_id存在sql注入因为拼接无单引号，可以绕过魔术引号转译)"></a>1.ad_js.php(ad_id存在sql注入因为拼接无单引号，可以绕过魔术引号转译)</h2><h4 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h4><blockquote>
+<p>$ad_id &#x3D; !empty($_GET[‘ad_id’]) ? trim($_GET[‘ad_id’]) : ‘’;</p>
+</blockquote>
+<h4 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h4><blockquote>
+<p>$ad &#x3D; $db-&gt;getone(“SELECT * FROM “.table(‘ad’).” WHERE ad_id &#x3D;<strong>“.$ad_id</strong>);</p>
+</blockquote>
 <h2 id="2-article-php-act-del时，id存在sql注入因为第一次未过滤"><a href="#2-article-php-act-del时，id存在sql注入因为第一次未过滤" class="headerlink" title="2.article.php(act&#x3D;del时，id存在sql注入因为第一次未过滤)"></a>2.article.php(act&#x3D;del时，id存在sql注入因为第一次未过滤)</h2>
             
         </div>
@@ -255,7 +268,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #00bcd4">审计</a>
+            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #ffa2c4">审计</a>
         </span>
         
     </div>
@@ -300,7 +313,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #ff7d73">漏洞复现</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #00bcd4">漏洞复现</a>
         </span>
         
     </div>
@@ -345,7 +358,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #03a9f4">漏洞复现</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #00a596">漏洞复现</a>
         </span>
         
     </div>
@@ -492,7 +505,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #ffa2c4">工具</a>
+            <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #00a596">工具</a>
         </span>
         
     </div>
@@ -602,7 +615,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%B7%A5%E5%85%B7SOP/" style="color: #03a9f4">工具SOP</a>
+            <a href="/tags/%E5%B7%A5%E5%85%B7SOP/" style="color: #ffa2c4">工具SOP</a>
         </span>
         
     </div>
