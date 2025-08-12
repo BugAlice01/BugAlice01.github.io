@@ -133,7 +133,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #00bcd4">
+                <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #ffa2c4">
                     审计
                 </a>
             </span>
@@ -145,9 +145,9 @@
     <div class="content" v-pre>
         <h2 id="1-index-php-file存在文件包含，addslash无法防文件包含"><a href="#1-index-php-file存在文件包含，addslash无法防文件包含" class="headerlink" title="1.index.php(file存在文件包含，addslash无法防文件包含)"></a>1.index.php(file存在文件包含，addslash无法防文件包含)</h2><h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>addslash(单双引号反斜杠NULL前加\)</p>
 <h4 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h4><p><strong>$file</strong>&#x3D;addslashes($_GET[‘r’]); &#x2F;&#x2F;接收文件名<br><strong>$action&#x3D;$file</strong>&#x3D;&#x3D;’’?’index’:$file; &#x2F;&#x2F;判断为空或者等于index<br>include(‘files&#x2F;‘<strong>.$action.</strong>‘.php’); &#x2F;&#x2F;载入相应文件</p>
-<span id="more"></span>
+<h2 id="2-inc-checklogin-php-cookie伪造登录"><a href="#2-inc-checklogin-php-cookie伪造登录" class="headerlink" title="2.inc&#x2F;checklogin.php(cookie伪造登录)"></a>2.inc&#x2F;checklogin.php(cookie伪造登录)</h2><span id="more"></span>
 
-<h2 id="2-inc-checklogin-php-cookie伪造登录"><a href="#2-inc-checklogin-php-cookie伪造登录" class="headerlink" title="2.inc&#x2F;checklogin.php(cookie伪造登录)"></a>2.inc&#x2F;checklogin.php(cookie伪造登录)</h2><h4 id="语句-1"><a href="#语句-1" class="headerlink" title="语句"></a>语句</h4><p>&lt;?php<br>$user&#x3D;$_COOKIE[‘user’];<br>if ($user&#x3D;&#x3D;””){<br>header(“Location: ?r&#x3D;login”);<br>exit;	<br>}<br>?&gt;</p>
+<h4 id="语句-1"><a href="#语句-1" class="headerlink" title="语句"></a>语句</h4><p>&lt;?php<br>$user&#x3D;$_COOKIE[‘user’];<br>if ($user&#x3D;&#x3D;””){<br>header(“Location: ?r&#x3D;login”);<br>exit;	<br>}<br>?&gt;</p>
 <h2 id="3-admin-files-wzlist-php-csrf-文章删除"><a href="#3-admin-files-wzlist-php-csrf-文章删除" class="headerlink" title="3.admin&#x2F;files&#x2F;wzlist.php(csrf-文章删除)"></a>3.admin&#x2F;files&#x2F;wzlist.php(csrf-文章删除)</h2><h4 id="语句-2"><a href="#语句-2" class="headerlink" title="语句"></a>语句</h4><p><strong>$delete&#x3D;$_GET[‘delete’];</strong><br>if ($delete&lt;&gt;””){<br>$query &#x3D; “DELETE FROM content <strong>WHERE id&#x3D;’$delete’”</strong>;</p>
 <h2 id="4-admin-files-editlink-php-id参数sql注入"><a href="#4-admin-files-editlink-php-id参数sql注入" class="headerlink" title="4.admin&#x2F;files&#x2F;editlink.php(id参数sql注入)"></a>4.admin&#x2F;files&#x2F;editlink.php(id参数sql注入)</h2><h4 id="语句-3"><a href="#语句-3" class="headerlink" title="语句"></a>语句</h4><p><strong>$id&#x3D;$_GET[‘id’];</strong><br>$type&#x3D;$_GET[‘type’];<br>if ($type&#x3D;&#x3D;1){<br>$query &#x3D; “SELECT * FROM nav <strong>WHERE id&#x3D;’$id’”;</strong></p>
 <h2 id="5-files-download-php-id参数sql注入"><a href="#5-files-download-php-id参数sql注入" class="headerlink" title="5.files&#x2F;download.php(id参数sql注入)"></a>5.files&#x2F;download.php(id参数sql注入)</h2><h4 id="语句-4"><a href="#语句-4" class="headerlink" title="语句"></a>语句</h4><p>$query &#x3D; “SELECT * FROM nav <strong>WHERE link&#x3D;’$llink’”</strong>;</p>

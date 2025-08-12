@@ -133,7 +133,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #00bcd4">
+                <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #ff7d73">
                     漏洞复现
                 </a>
             </span>
@@ -152,14 +152,14 @@
 <p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/tomcat-pass-getshell/3.png" alt="3"></p>
 <h4 id="4-getshell"><a href="#4-getshell" class="headerlink" title="4.getshell"></a>4.getshell</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/tomcat-pass-getshell/4.jpg" alt="4"></p>
 <p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/tomcat-pass-getshell/5.jpg" alt="5"></p>
-<h2 id="二、tomcat-文件上传-CVE-2017-12615"><a href="#二、tomcat-文件上传-CVE-2017-12615" class="headerlink" title="二、tomcat 文件上传 (CVE-2017-12615)"></a>二、tomcat 文件上传 (CVE-2017-12615)</h2><h4 id="1-PUT方法探测"><a href="#1-PUT方法探测" class="headerlink" title="1.PUT方法探测"></a>1.PUT方法探测</h4><blockquote>
+<h2 id="二、tomcat-文件上传-CVE-2017-12615"><a href="#二、tomcat-文件上传-CVE-2017-12615" class="headerlink" title="二、tomcat 文件上传 (CVE-2017-12615)"></a>二、tomcat 文件上传 (CVE-2017-12615)</h2><span id="more"></span>
+
+<h4 id="1-PUT方法探测"><a href="#1-PUT方法探测" class="headerlink" title="1.PUT方法探测"></a>1.PUT方法探测</h4><blockquote>
 <p>OPTIONS &#x2F;xx HTTP&#x2F;1.1</p>
 </blockquote>
 <p>开启了put方法</p>
 <p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2017-12615/1.png" alt="1"></p>
-<h4 id="2-put文件写入"><a href="#2-put文件写入" class="headerlink" title="2.put文件写入"></a>2.put文件写入</h4><span id="more"></span>
-
-<p>文件头：</p>
+<h4 id="2-put文件写入"><a href="#2-put文件写入" class="headerlink" title="2.put文件写入"></a>2.put文件写入</h4><p>文件头：</p>
 <blockquote>
 <p>PUT &#x2F;shell.jsp&#x2F; HTTP&#x2F;1.1</p>
 </blockquote>

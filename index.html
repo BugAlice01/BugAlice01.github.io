@@ -173,7 +173,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #03a9f4">审计</a>
+            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #00a596">审计</a>
         </span>
         
     </div>
@@ -200,6 +200,7 @@
             
             <h2 id="1-index-php-file存在文件包含，addslash无法防文件包含"><a href="#1-index-php-file存在文件包含，addslash无法防文件包含" class="headerlink" title="1.index.php(file存在文件包含，addslash无法防文件包含)"></a>1.index.php(file存在文件包含，addslash无法防文件包含)</h2><h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>addslash(单双引号反斜杠NULL前加\)</p>
 <h4 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h4><p><strong>$file</strong>&#x3D;addslashes($_GET[‘r’]); &#x2F;&#x2F;接收文件名<br><strong>$action&#x3D;$file</strong>&#x3D;&#x3D;’’?’index’:$file; &#x2F;&#x2F;判断为空或者等于index<br>include(‘files&#x2F;‘<strong>.$action.</strong>‘.php’); &#x2F;&#x2F;载入相应文件</p>
+<h2 id="2-inc-checklogin-php-cookie伪造登录"><a href="#2-inc-checklogin-php-cookie伪造登录" class="headerlink" title="2.inc&#x2F;checklogin.php(cookie伪造登录)"></a>2.inc&#x2F;checklogin.php(cookie伪造登录)</h2>
             
         </div>
     </div>
@@ -213,7 +214,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #ffa2c4">审计</a>
+            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #03a9f4">审计</a>
         </span>
         
     </div>
@@ -240,6 +241,7 @@
             
             <h2 id="1-ad-js-php-ad-id存在sql注入因为拼接无单引号，可以绕过魔术引号转译"><a href="#1-ad-js-php-ad-id存在sql注入因为拼接无单引号，可以绕过魔术引号转译" class="headerlink" title="1.ad_js.php(ad_id存在sql注入因为拼接无单引号，可以绕过魔术引号转译)"></a>1.ad_js.php(ad_id存在sql注入因为拼接无单引号，可以绕过魔术引号转译)</h2><h4 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h4><p>​	$ad_id &#x3D; !empty($_GET[‘ad_id’]) ? trim($_GET[‘ad_id’]) : ‘’;</p>
 <h4 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h4><p>​	$ad &#x3D; $db-&gt;getone(“SELECT * FROM “.table(‘ad’).” WHERE ad_id &#x3D;<strong>“.$ad_id</strong>);</p>
+<h2 id="2-article-php-act-del时，id存在sql注入因为第一次未过滤"><a href="#2-article-php-act-del时，id存在sql注入因为第一次未过滤" class="headerlink" title="2.article.php(act&#x3D;del时，id存在sql注入因为第一次未过滤)"></a>2.article.php(act&#x3D;del时，id存在sql注入因为第一次未过滤)</h2>
             
         </div>
     </div>
@@ -253,7 +255,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #00a596">审计</a>
+            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #03a9f4">审计</a>
         </span>
         
     </div>
@@ -298,7 +300,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #ffa2c4">漏洞复现</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #00a596">漏洞复现</a>
         </span>
         
     </div>
@@ -343,7 +345,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #03a9f4">漏洞复现</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #00a596">漏洞复现</a>
         </span>
         
     </div>
@@ -377,12 +379,7 @@
 <p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/tomcat-pass-getshell/3.png" alt="3"></p>
 <h4 id="4-getshell"><a href="#4-getshell" class="headerlink" title="4.getshell"></a>4.getshell</h4><p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/tomcat-pass-getshell/4.jpg" alt="4"></p>
 <p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/tomcat-pass-getshell/5.jpg" alt="5"></p>
-<h2 id="二、tomcat-文件上传-CVE-2017-12615"><a href="#二、tomcat-文件上传-CVE-2017-12615" class="headerlink" title="二、tomcat 文件上传 (CVE-2017-12615)"></a>二、tomcat 文件上传 (CVE-2017-12615)</h2><h4 id="1-PUT方法探测"><a href="#1-PUT方法探测" class="headerlink" title="1.PUT方法探测"></a>1.PUT方法探测</h4><blockquote>
-<p>OPTIONS &#x2F;xx HTTP&#x2F;1.1</p>
-</blockquote>
-<p>开启了put方法</p>
-<p><img src="/images/%E5%A4%AA%E9%98%BF%E5%B9%B3%E5%8F%B0%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/CVE-2017-12615/1.png" alt="1"></p>
-<h4 id="2-put文件写入"><a href="#2-put文件写入" class="headerlink" title="2.put文件写入"></a>2.put文件写入</h4>
+<h2 id="二、tomcat-文件上传-CVE-2017-12615"><a href="#二、tomcat-文件上传-CVE-2017-12615" class="headerlink" title="二、tomcat 文件上传 (CVE-2017-12615)"></a>二、tomcat 文件上传 (CVE-2017-12615)</h2>
             
         </div>
     </div>
@@ -396,7 +393,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #ff7d73">漏洞复现</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #00bcd4">漏洞复现</a>
         </span>
         
     </div>
@@ -472,7 +469,16 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <p><strong>nvdmonitor可以定时监控NVD漏洞库指定目标，并通过企业微信定时推送新增漏洞详情</strong><br><a target="_blank" rel="noopener" href="https://github.com/BugAlice01/nvdmonitor">https://github.com/BugAlice01/nvdmonitor</a><br>pip install -r requirements.txt<br>config.yaml配置扫描的参数<br>python nvdmonitor.py   <ins>单次扫描本日新增漏洞并推送到企微 </ins><br>python scheduler.py     <ins>每日定时扫描本日新增漏洞并推送到企微</ins><br>
+            <p><strong>nvdmonitor可以定时监控NVD漏洞库指定目标，并通过企业微信定时推送新增漏洞详情</strong><br><a target="_blank" rel="noopener" href="https://github.com/BugAlice01/nvdmonitor">https://github.com/BugAlice01/nvdmonitor</a><br>pip install -r requirements.txt<br>config.yaml配置扫描的参数<br>python nvdmonitor.py   <ins>单次扫描本日新增漏洞并推送到企微 </ins><br>python scheduler.py     <ins>每日定时扫描本日新增漏洞并推送到企微</ins></p>
+<br>
+
+<h2 id="通过config-yaml修改扫描参数"><a href="#通过config-yaml修改扫描参数" class="headerlink" title="通过config.yaml修改扫描参数"></a>通过config.yaml修改扫描参数</h2><h4 id="1-产品名称配置-NVD搜索的内容"><a href="#1-产品名称配置-NVD搜索的内容" class="headerlink" title="1.产品名称配置(NVD搜索的内容)"></a>1.产品名称配置(NVD搜索的内容)</h4><p>querry: </p>
+<h4 id="2-扫描页数"><a href="#2-扫描页数" class="headerlink" title="2.扫描页数"></a>2.扫描页数</h4><p>page: 1-5</p>
+<h4 id="3-任务名称"><a href="#3-任务名称" class="headerlink" title="3.任务名称"></a>3.任务名称</h4><p>target: </p>
+<h4 id="4-企微机器人推送配置-为空则不推送"><a href="#4-企微机器人推送配置-为空则不推送" class="headerlink" title="4.企微机器人推送配置(为空则不推送)"></a>4.企微机器人推送配置(为空则不推送)</h4><p>wechat_bot:<br>  name: nvdmonitor<br>  webhook_url: “ “</p>
+<h4 id="5-调度配置"><a href="#5-调度配置" class="headerlink" title="5.调度配置"></a>5.调度配置</h4><p>scheduler:<br>  mode: “fixed”  # fixed 或 interval<br>  fixed模式配置 (每天固定时间执行)<br>  fixed_times:<br>    - “09:00”<br>    - “14:00”<br>    - “18:00”<br>  interval模式配置 (每隔几小时执行)<br>  interval_hours: 6<br><br></p>
+<p><font color="red">注意：企微推送有字数限制，如果消息过长则不能推送；通过任务日期json去重；扫描结果会存储在result</font></p>
+
             
         </div>
     </div>
@@ -486,7 +492,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #00bcd4">工具</a>
+            <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #ffa2c4">工具</a>
         </span>
         
     </div>
@@ -520,6 +526,14 @@
 <p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E4%BA%91%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/2.png"></p>
 <p>将ez与ez证书放在同一个目录</p>
 <p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E4%BA%91%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/3.png"></p>
+<p>在该目录开启命令行，ez web端启动(如MAC命令为.&#x2F; ez的文件名 web)</p>
+<p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E4%BA%91%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/4.png"></p>
+<p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E4%BA%91%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/5.png"></p>
+<p>访问<a target="_blank" rel="noopener" href="http://127.0.0.1:8888/">http://127.0.0.1:8888</a> + &#x2F;bwheyansn(每次启动随机给出的路径)</p>
+<p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E4%BA%91%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/6.png"></p>
+<p>初始密码为ez，首次访问需要重置密码</p>
+<p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E4%BA%91%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/7.png"></p>
+<h2 id="2-ezhelper安装与基础配置"><a href="#2-ezhelper安装与基础配置" class="headerlink" title="2.ezhelper安装与基础配置"></a>2.ezhelper安装与基础配置</h2>
             
         </div>
     </div>
@@ -558,8 +572,7 @@
     <div class="description">
         <div class="content" v-pre>
             
-            <p>​</p>
-<h2 id="1-ez安装与基础配置"><a href="#1-ez安装与基础配置" class="headerlink" title="1.ez安装与基础配置"></a>1.ez安装与基础配置</h2><p><a target="_blank" rel="noopener" href="https://github.com/m-sec-org/EZ/releases/tag/1.8.9">https://github.com/m-sec-org/EZ/releases/tag/1.8.9</a></p>
+            <h2 id="1-ez安装与基础配置"><a href="#1-ez安装与基础配置" class="headerlink" title="1.ez安装与基础配置"></a>1.ez安装与基础配置</h2><p><a target="_blank" rel="noopener" href="https://github.com/m-sec-org/EZ/releases/tag/1.8.9">https://github.com/m-sec-org/EZ/releases/tag/1.8.9</a></p>
 <p>选择操作系统对应的ez-zip文件并解压</p>
 <p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/1.png"></p>
 <p>下载ez证书</p>
@@ -568,6 +581,14 @@
 <p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/2.png"></p>
 <p>将ez与ez证书放在同一个目录</p>
 <p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/3.png"></p>
+<p>在该目录开启命令行，ez web端启动(如MAC命令为.&#x2F; ez的文件名 web)</p>
+<p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/4.png"></p>
+<p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/5.png"></p>
+<p>访问<a target="_blank" rel="noopener" href="http://127.0.0.1:8888/">http://127.0.0.1:8888</a> + &#x2F;bwheyansn(每次启动随机给出的路径)</p>
+<p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/6.png"></p>
+<p>初始密码为ez，首次访问需要重置密码</p>
+<p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/7.png"></p>
+<h2 id="2-ezhelper安装与基础配置"><a href="#2-ezhelper安装与基础配置" class="headerlink" title="2.ezhelper安装与基础配置"></a>2.ezhelper安装与基础配置</h2>
             
         </div>
     </div>
@@ -581,7 +602,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%B7%A5%E5%85%B7SOP/" style="color: #00a596">工具SOP</a>
+            <a href="/tags/%E5%B7%A5%E5%85%B7SOP/" style="color: #ffa2c4">工具SOP</a>
         </span>
         
     </div>
